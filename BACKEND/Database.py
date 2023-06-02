@@ -252,29 +252,27 @@ class DatabaseModel:
                 cursor.close()
 
 
-
+    #Helper Function to Calculate Batch Size
     def calculateBatchSizeNum(self,batchsize,totalSize):
        return round(float(batchsize)/float(totalSize))
         
 
+    #Generate Practical Duties
     def generateDuties(self):
+        #get college list
         collegesList=self.getCollegesList();
-        print("\n\ncollege List --> ",collegesList)
-        #---------------------------------------------
+        
+        #get roadmap of departments CS and IT
         roadMapYearCS=self.getRoadMapYears('cs')
         roadMapYearIT=self.getRoadMapYears('it')
 
-        #roadMapYear=self.getRoadMapYears(dept)
-        #print("road map years are : ",roadMapYearCS, "  ",roadMapYearIT)
         st=1
-
+        #Make list for every college
         for college in collegesList:
-            #college[0] --id -- affiliated_colleges
-            #dep----- enrolled_departments
             affYear=college[1]
-
+            
+            #Get college department and batch information
             departmentsList= self.getCollegeDepartment(college[0])
-            print("--->>>>:::",departmentsList)
             batchesList=self.getBatchesList(affYear)
             batchRdDepList=[]
             batchSizeList=self.getBatchSize(int(college[0]))
@@ -285,15 +283,12 @@ class DatabaseModel:
             batchSizeDepIT=0
 
             for batchSize in batchSizeList:
-                print("\n\nbatch list -->> ",batchSize)
                 if batchSize[0]==1:  #CS
                     batchSizeDepCS= self.calculateBatchSizeNum(batchSize[3],batchSize[2])
                 if batchSize[0]==2:  #IT
                     batchSizeDepIT=self.calculateBatchSizeNum(batchSize[3],batchSize[2])
                     
-            print("batchsize num cs it : ",batchSizeDepCS,"---",batchSizeDepIT)
-           
-
+            #Make for each current batches
             for batchYear in batchesList:
                 if('cs' in departmentsList):
                     for rdYear in roadMapYearCS:
@@ -317,22 +312,8 @@ class DatabaseModel:
                             list1.append(batchSizeDepIT)
                             batchRdDepList.append(list1)
                             break
-                
-            #batchRdDepList.append(batchRdDepList1[0])
-            #batchRdDepList.append(batchRdDepList2[0])
-
-
-            #(batchyear,rdyeyear,dept)
-            #batchRdDepList.sort()
-
+            
             batchRdDepList= sorted(batchRdDepList, key=lambda x: x[2])
-
-            print("batch rd list is --->>>-->> ",batchRdDepList)
-
-
-            print("batches List --> ",batchesList)
-            print("back in loop")
-
 
             flagBatchSt=False
             today = datetime.date.today()
@@ -343,7 +324,6 @@ class DatabaseModel:
             if(int(month) in (8,9,10,11,12,1,2)):
                 print("status is going to be true ")
                 flagBatchSt=True
-           # sems=self.GetSemesters(batchRdList,currYear,affYear,flagBatchSt)
             btachRdSem =self.GetSemesters(batchRdDepList,flagBatchSt)
 
             print("current sem of clg ",college[0], " batchrdsems =  ", 
@@ -355,15 +335,16 @@ class DatabaseModel:
                 st=st+1
             else:
                 pracDuties=self.getCollegeCoursesDuties(batchRdDepList,pracDuties)
+
             print("\n\n--->>>.Length of pract duties ",len(pracDuties))
             print("\n\nPracDuties Duties lust ::  \n\n---------------->",pracDuties)
         #save duties in DB
         self.savePracticalDuties(pracDuties)
 
 
+    #For next generation of duties check its status
     def checkDutyGenerateStatus(self):
         try:
-            print("\n\ncheckDutyGenerateStatus")
             if self.connection!=None:
                 cursor=self.connection.cursor()
                 query="select prac_duty_id from practical_duty where prac_duty_status !=2"
@@ -378,6 +359,7 @@ class DatabaseModel:
             if cursor!=None:
                 cursor.close()
 
+    #Get Batch Size
     def getBatchSize(self,clgId):
         try:
             print("\n\nIn Road Map DataBase")
@@ -388,15 +370,6 @@ class DatabaseModel:
                 cursor.execute(query,args)
 
                 batchSizeList=cursor.fetchall()
-               
-                print("batch size list  is --->" ,batchSizeList)
-
-                # rdbatchSizeList=[]
-                # for rd in batchSizeList:
-                #      print(rd)
-                #      rdList1.append(rd[0])
-                # print("rd list11-- -->>" ,rdList1)
-
                 return batchSizeList
         except Exception as e:
             print("Exception in batchsize ",str(e))
@@ -404,9 +377,7 @@ class DatabaseModel:
             if cursor!=None:
                 cursor.close()
 
-
-
-
+    #Get road map years for a department
     def getRoadMapYears(self,dept):
         try:
             print("\n\nIn Road Map DataBase")
@@ -420,33 +391,28 @@ class DatabaseModel:
 
                 rdList=cursor.fetchall()
                
-                print("rd list --->" ,rdList)
-
                 rdList1=[]
                 for rd in rdList:
                      print(rd)
                      rdList1.append(rd[0])
-                print("rd list11-- -->>" ,rdList1)
-
+               
                 return rdList1
-
-
         except Exception as e:
-            print("Exception in --getroad_mapyears",str(e))
+            print("Exception in getRoadMapYears",str(e))
         finally:
             if cursor!=None:
                 cursor.close()
 
     
-    
+    #Get current year
     def GetCurrentYear(self):
         import datetime
         today = datetime.date.today()
         year = today.strftime("%Y")
-        print(year)
         return year
 
 
+    #Get Info from roadmap for practical
     def GetRoadMapInfo(self):
         try:
             print("In Roadmap calc")
@@ -459,8 +425,7 @@ class DatabaseModel:
                 
                 print(str(lastYear))
                 query="Select batch_rd_year from batch_enrollment"
-                # where YEAR(batch_year_date) BETWEEN %s and %s;"
-               
+
                 args=(currYear,str(lastYear))
                 cursor.execute(query,args)
                 roadmapList=cursor.fetchall()
@@ -474,6 +439,7 @@ class DatabaseModel:
                     cursor.close()
 
 
+    #Get All list of Practical Duty
     def getAllPraticalDuty(self):
         try:
             print("\n\nIn Road Map DataBase")
@@ -493,7 +459,7 @@ class DatabaseModel:
                 cursor.close()
 
 
-
+    #Get Practical Duty of based on its types assigned, not assigned or rejected.
     def getTypeDutiesList(self,status):
         try:
             print("\n\nget type duties")
@@ -504,8 +470,7 @@ class DatabaseModel:
                 args=(status,)
                 cursor.execute(query,args)
                 dutyList=cursor.fetchall()
-               
-                print("DB All Pract duty list --->" ,dutyList)                
+                             
                 return dutyList
 
         except Exception as e:
@@ -516,7 +481,7 @@ class DatabaseModel:
 
 
 
-
+    #Get semester information of a duty
     def getSemInfo(self,rd_year,crs_code,rd_dept):
         try:
             print("In Roadmap calc")
@@ -529,9 +494,7 @@ class DatabaseModel:
                 args=(str(rd_year),str(crs_code),str(rd_dept))
                 cursor.execute(query,args)
                 
-                print("get sem of ",rd_year,crs_code,rd_dept)
                 SemCrsList=cursor.fetchall()
-                print("Sem---->",SemCrsList)
                 return SemCrsList[0]
         except Exception as e:
                 print("Exception in getting semcrs",str(e))
@@ -539,9 +502,10 @@ class DatabaseModel:
                 if cursor!=None:
                     cursor.close()
 
+    #Get College Info of a specific college ID
     def getCollegeInfo(self,clgId):
         try:
-            print("In Roadmap calc")
+            print("In getCollegeInfo")
             if self.connection!=None:
                 cursor=self.connection.cursor()
                 
@@ -549,7 +513,6 @@ class DatabaseModel:
                 args=(clgId,)
                 cursor.execute(query,args)
                 clgInfo=cursor.fetchall()
-                print("clgName-->",clgInfo)
                 return clgInfo[0]
 
         except Exception as e:
@@ -558,16 +521,14 @@ class DatabaseModel:
                 if cursor!=None:
                     cursor.close()
     
-
+    #Get All affiliated college list
     def getAllCollege(self):
         try:
-            print("In get All college")
             if self.connection!=None:
                 cursor=self.connection.cursor()
                 query="select ac_name from affiliated_colleges"
                 cursor.execute(query)
                 clgInfo=cursor.fetchall()
-                #print("college list -->",clgInfo)
                 return clgInfo
         except Exception as e:
                 print("Exception in getting clgName",str(e))
@@ -575,16 +536,16 @@ class DatabaseModel:
                 if cursor!=None:
                     cursor.close()
 
+    
+
     def getCollegeId(self,clgName):
         try:
-            print("In get All college is ",clgName)
             if self.connection!=None:
                 cursor=self.connection.cursor()
                 query="select distinct ac_id from affiliated_colleges where ac_name=%s"
                 args=(clgName,)
                 cursor.execute(query,args)
                 acId=cursor.fetchall()
-                print("college Id list -->",acId)
                 return acId[0]
         except Exception as e:
                 print("Exception in getting college Id",str(e))
@@ -592,17 +553,13 @@ class DatabaseModel:
                 if cursor!=None:
                     cursor.close()
 
+    #Get Id of specific practical duty
     def getPracticalDutyId(self,acId,dept,crsCode):
         try:
-            print("In get practical duty id ",acId,dept,crsCode)
             if self.connection!=None:
                 cursor=self.connection.cursor()
                 query="select prac_duty_id from practical_duty where "\
                " ac_id=%s and rd_dept=%s and rd_crs_code=%s;"
-                # dept1='1'
-                # if dept=="it":
-                #     dept1='2'
-                
                 args=(acId,dept,crsCode)
                 cursor.execute(query,args)
                 practId=cursor.fetchall()
@@ -614,7 +571,7 @@ class DatabaseModel:
                 if cursor!=None:
                     cursor.close()
 
-
+    #Get examiner ID of a practical duty
     def getTeacherId(self,acId,dept,crsCode):
         try:
             print("In get practical duty id ",acId,dept,crsCode)
@@ -634,7 +591,8 @@ class DatabaseModel:
                 if cursor!=None:
                     cursor.close()
 
-    
+
+    #Get Examiner Detail
     def getTeacherDetail(self,examinerId):
         try:
             print("In get teacher detail  ",examinerId)
@@ -656,10 +614,9 @@ class DatabaseModel:
                     cursor.close()
 
 
-
+    #Get courses of affiliated college
     def getCollegeCourses(self,clgId,dept):
         try:
-            print("In get getCollegeCourses ",clgId,dept)
             if self.connection!=None:
                 cursor=self.connection.cursor()
                 query="select rd_crs_code from practical_duty "\
@@ -676,6 +633,7 @@ class DatabaseModel:
                 if cursor!=None:
                     cursor.close()
 
+    #Get course information from road map
     def getCollegeCourseInfo(self,rdYear,dept,crs_code):
         try:
             print("In get All college====>",rdYear,dept,crs_code)
@@ -696,7 +654,7 @@ class DatabaseModel:
                     cursor.close()
 
 
-
+    #Get Road map for specific college
     def getCollegeRoadMapYear(self,clgId,dept):
         try:
             print("In get All college")
@@ -707,7 +665,6 @@ class DatabaseModel:
                 args=(clgId,dept)
                 cursor.execute(query,args)
                 year=cursor.fetchall()
-                print("year list -->",year)
                 return year[0]
         except Exception as e:
                 print("Exception in getting college year",str(e))
@@ -715,7 +672,7 @@ class DatabaseModel:
                 if cursor!=None:
                     cursor.close()
 
-    
+    #Get Examiners according to thier ranking
     def getRankedExaminer(self,courseName):
         try:
             print("In get getRankedExaminer")
@@ -730,7 +687,6 @@ class DatabaseModel:
                 args=(courseName,)
                 cursor.execute(query,args)
                 rankedExaminers=cursor.fetchall()
-                print("getRankedExaminer -->",rankedExaminers)
                 return rankedExaminers
         except Exception as e:
                 print("Exception in getRankedExaminer",str(e))
@@ -739,10 +695,9 @@ class DatabaseModel:
                     cursor.close()
 
 
-    
+    #Update Practical Duty
     def savePracticalDuty(self,practDutyId,examinerId,moreInfo):  
         try:
-            print("practDutyId insertion is :",practDutyId)
             if self.connection!=None:
                 cursor=self.connection.cursor()
                 date1=datetime.date.today()
@@ -759,7 +714,7 @@ class DatabaseModel:
             if cursor!=None:
                 cursor.close()
 
-
+    #Get Admin Notifications For Practical Duty
     def getAdminNotificationsPrac(self):
         try:
             print("In get admin ntfs")
@@ -779,6 +734,7 @@ class DatabaseModel:
                     cursor.close()
 
 
+    #Get Examiner Name 
     def getExaminerName(self,exm_id):
         try:
             print("In get admin ntfs")
@@ -798,7 +754,7 @@ class DatabaseModel:
                 if cursor!=None:
                     cursor.close()
 
-#getExmProfilePic
+    #Get Examiner Prfile Picture
     def getExmProfilePic(self,exm_id):
         try:
             print("In get profile pic exam")
@@ -818,6 +774,7 @@ class DatabaseModel:
                 if cursor!=None:
                     cursor.close()
 
+    #Update Admin Notifications
     def updateAdminNotifications(self,practDutyId):
         try:
             print("practDutyId insertion is :",practDutyId)
