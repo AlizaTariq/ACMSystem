@@ -19,15 +19,6 @@ export default function ShowDutiesPracT() {
   const [query, setQuery] = useState("");
   const accessToken = localStorage.getItem("access_token");
 
-  // useEffect(() => {
-  //   fetch("http://127.0.0.1:5000/getAllPraticalList")
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setList1(data);
-  //       setFilteredList(data);
-  //     })
-  //     .then(() => console.log("data dtt--", list1));
-  // }, []);
   useEffect(() => {
     const retrieve = async () => {
       const response = await axios.get(
@@ -93,19 +84,18 @@ export default function ShowDutiesPracT() {
       ) : (
         <div className="container">
           <div className="d-flex flex-row-reverse bd-highlight">
-            <p>
-              <div className="searchBar">
-                <input
-                  id="searchBarInput"
-                  type="text"
-                  placeholder="Enter keywords..."
-                  value={query}
-                  onChange={handleChange}
-                  size="50"
-                />
-              </div>
+            <p className="form-inline">
+              {/* onChange={event => setSearchValue(event.target.value)}  */}
+              <input
+                id="searchingfeedback"
+                className="form-control mr-sm-2 mt-"
+                onChange={(event) => setSearchValue(event.target.value)}
+                type="search"
+                placeholder="Search"
+              />
             </p>
           </div>
+
           <div className="d-flex flex-row bd-highlight">
             <p className="form-inline"></p>
           </div>
@@ -126,30 +116,56 @@ export default function ShowDutiesPracT() {
               {/* Table body */}
               <tbody>
                 {currentItems.length ? (
-                  currentItems.map((item, index) => (
-                    <tr
-                      style={{ border: "1px" }}
-                      key={serialNumber + index}
-                      id={serialNumber + index}
-                    >
-                      <td className="tableText">{serialNumber + index}</td>
+                  currentItems
+                    .filter((item) => {
+                      if (values === "") {
+                        return item;
+                      } else if (
+                        item[1].toLowerCase().includes(values.toLowerCase())
+                      ) {
+                        return item;
+                      } else if (
+                        item[2].toLowerCase().includes(values.toLowerCase())
+                      ) {
+                        return item;
+                      } else if (
+                        item[3].toLowerCase().includes(values.toLowerCase())
+                      ) {
+                        return item;
+                      } else if (
+                        item[4].toLowerCase().includes(values.toLowerCase())
+                      ) {
+                        return item;
+                      } else if (
+                        item[5].toString().includes(values.toLowerCase())
+                      ) {
+                        return item;
+                      }
+                    })
+                    .map((item, index) => (
+                      <tr
+                        style={{ border: "1px" }}
+                        key={serialNumber + index}
+                        id={serialNumber + index}
+                      >
+                        <td className="tableText">{serialNumber + index}</td>
 
-                      <td className="tableText">{item[3]}</td>
-                      <td className="tableText">{item[4]}</td>
-                      <td className="tableText">{item[1]}</td>
-                      <td className="tableText">{item[2]}</td>
-                      <td className="tableText">{item[5]}</td>
-                      <td>
-                        <button
-                          className="showDutyTableBtn"
-                          id="submitTableBtn"
-                          onClick={(e) => handleOnClickTableDetail(e, item)}
-                        >
-                          Details
-                        </button>
-                      </td>
-                    </tr>
-                  ))
+                        <td className="tableText">{item[3]}</td>
+                        <td className="tableText">{item[4]}</td>
+                        <td className="tableText">{item[1]}</td>
+                        <td className="tableText">{item[2]}</td>
+                        <td className="tableText">{item[5]}</td>
+                        <td>
+                          <button
+                            className="showDutyTableBtn"
+                            id="submitTableBtn"
+                            onClick={(e) => handleOnClickTableDetail(e, item)}
+                          >
+                            Details
+                          </button>
+                        </td>
+                      </tr>
+                    ))
                 ) : (
                   <tr>
                     <td colSpan="6">Loading...</td>
