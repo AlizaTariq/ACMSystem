@@ -38,6 +38,18 @@ const SideBar = () => {
             <a href="/ShowDuties" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="paste">Duties</CDBSidebarMenuItem>
             </a>
+
+            <a href="/PracCollegeReview" activeclassname="activeClicked">
+              <CDBSidebarMenuItem icon="paste">
+                College Review
+              </CDBSidebarMenuItem>
+            </a>
+            <a href="/PracTeacherFeedback" activeclassname="activeClicked">
+              <CDBSidebarMenuItem icon="paste">
+                Teacher Feedback
+              </CDBSidebarMenuItem>
+            </a>
+
             <NavLink
               href="/hero404"
               target="_blank"

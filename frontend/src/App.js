@@ -11,6 +11,8 @@ import { redirect, useHistory } from "react-router-dom";
 import CollegeReview from "./Components/pages/CollegeReview";
 import SearchBar from "./Components/pages/SearchBar";
 import GenerateDuties from "./Components/pages/GenerateDuties";
+import PracCollegeReview from "./Components/pages/PracCollegeReview";
+import PracTeacherFeedback from "./Components/pages/PracTeacherFeedback";
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import TeacherReview from "./Components/pages/TeacherReview";
@@ -95,10 +97,18 @@ function App() {
           <Route path="/SideBar" element={<SideBar />} />
           <Route path="/Exam_Schedule" element={<Exam_Schedule />} />
           <Route path="/TeacherReview" element={<TeacherReview />} />
-          <Route path="/data" element={<Form />} />"
-          <Route path="/showduties" element={<ShowDuties />} />"
-          <Route path="/searchBar" element={<SearchBar />} />"
-          <Route path="/GenerateDuties" element={<GenerateDuties />} />"
+          <Route path="/data" element={<Form />} />
+          <Route path="/showduties" element={<ShowDuties />} />
+          <Route path="/searchBar" element={<SearchBar />} />
+          <Route path="/GenerateDuties" element={<GenerateDuties />} />
+          <Route
+            path="/PracTeacherFeedback"
+            element={<PracTeacherFeedback />}
+          />
+          <Route
+            path="/PracCollegeReview"
+            element={<PracCollegeReview></PracCollegeReview>}
+          ></Route>
           <Route
             path="/TableOfCariculum"
             element={<TableOfCariculum></TableOfCariculum>}

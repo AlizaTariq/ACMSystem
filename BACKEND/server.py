@@ -41,9 +41,9 @@ password=app.config["DB_PASSWORD"],host=app.config["DB_HOST"])
 dbModel= DatabaseModel(app.config["DATABASE"],app.config["DB_USER"],
     app.config["DB_PASSWORD"],app.config["DB_HOST"])
 
-dbModel.getExaminerName(4)
-
-
+#dbModel.getExaminerName(4)
+#dbModel.getCollegeReviewList()
+#dbModel.getTeacherFeedbackList()
 
 #dbModel.SendReqforDuty(1);
 
@@ -333,6 +333,36 @@ def getTeacherDetail():
 def getAllCollegeList():
     clgList=dbModel.getAllCollege()
     return json.dumps(clgList)
+
+
+
+#Get College Review of Affiliated College
+@app.route('/getCollegeReview')
+def getCollegeReview():
+    list2=dbModel.getCollegeReviewList()
+    print("List ofgetCollegeReview---------------->>>>>",list2)
+    finalList=[]
+    for list1 in list2:
+        infoList=[]
+        clgInfo=dbModel.getCollegeInfo(list1[3]) #index 5 college name
+        teacherInfo=dbModel.getTeacherDetail(list1[1])
+        infoList.append(list1[0]) #college review id
+        infoList.append(teacherInfo[0]) #examiner Id
+        infoList.append(teacherInfo[1]) #examiner name
+        infoList.append(clgInfo[5]) #college name
+        infoList.append(list1[2]) #complain
+        finalList.append(infoList)
+    
+    return json.dumps(finalList)
+
+
+#Get Feedback of Teacher
+@app.route('/getTeacherFeedback')
+def getTeacherFeedback():
+    teacherFeedBackList=dbModel.getTeacherFeedbackList()
+    print("List getTeacherFeedback---------------->>>>>",teacherFeedBackList)
+    return json.dumps(teacherFeedBackList)
+
 
 ###################################################################################
 

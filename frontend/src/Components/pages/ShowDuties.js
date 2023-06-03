@@ -23,8 +23,6 @@ const ShowDuties = () => {
   const navigate = useNavigate();
   const accessToken = localStorage.getItem("access_token");
 
-  //  const history = useHistory();
-
   useEffect(() => {
     // fetch("http://localhost:3000/getAllPraticalList")
     fetch("http://127.0.0.1:5000/getAllPraticalList")
@@ -92,7 +90,7 @@ const ShowDuties = () => {
 
   return (
     <>
-     <NavBar/>
+      <NavBar />
       <div className="ShowDutyMainDiv">
         <div className="searchBar">
           <input

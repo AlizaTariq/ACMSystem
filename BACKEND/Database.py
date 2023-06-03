@@ -793,6 +793,43 @@ class DatabaseModel:
             if cursor!=None:
                 cursor.close()
 
+
+    #Get All list of Practical Duty
+    def getCollegeReviewList(self):
+        try:
+            if self.connection!=None:
+                cursor=self.connection.cursor()
+                query="select * from college_review"
+                cursor.execute(query)
+                collegeReviewList=cursor.fetchall()
+               
+                print("All collegeReviewList  --->" ,collegeReviewList)                
+                return collegeReviewList
+        except Exception as e:
+            print("Exception in collegeReviewList",str(e))
+        finally:
+            if cursor!=None:
+                cursor.close()
+
+
+    #Get All list of Teacher Feedback
+    def getTeacherFeedbackList(self):
+        try:
+            if self.connection!=None:
+                cursor=self.connection.cursor()
+                query="select * from teacher_feedback"
+                cursor.execute(query)
+                feedbackList=cursor.fetchall()
+               
+                print("All feedbackList  --->" ,feedbackList)                
+                return feedbackList
+        except Exception as e:
+            print("Exception in feedbackList",str(e))
+        finally:
+            if cursor!=None:
+                cursor.close()
+
+
     
     ############################################3###################################
 
