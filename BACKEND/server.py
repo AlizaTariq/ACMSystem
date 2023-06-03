@@ -364,6 +364,46 @@ def getTeacherFeedback():
     return json.dumps(teacherFeedBackList)
 
 
+#Get List of Top 50 Ranked Examiners
+@app.route('/getRankedExmList')
+def getRankedExmList():
+    rankedList=dbModel.getRankedExaminerList()
+    print("List rankedList---------------->>>>>",rankedList)
+    return json.dumps(rankedList)
+
+
+#Get List Affiliated Colleges
+@app.route('/getAffiliatedColleges')
+def getAffiliatedColleges():
+    collegeList=dbModel.getCollegesList()
+    print("CollegesList---------------->>>>>",collegeList)
+    return json.dumps(collegeList)
+
+
+#Get getCountDetail
+@app.route('/getCountDetail')
+def getCountDetail():
+    list1=[]
+    #[48, 1026, 1045, 1022, 1052, 3, 5, 6, 2]
+    list1.append(dbModel.getPracDutyCount())
+
+    list1.append(dbModel.getPracDutyCountType(0)) #not assigned
+    list1.append(dbModel.getPracDutyCountType(1)) #pending
+    list1.append(dbModel.getPracDutyCountType(2)) # accepted
+    list1.append(dbModel.getPracDutyCountType(3)) #rejected
+
+    list1.append(dbModel.getExamDutyCount())
+    list1.append(dbModel.getExaminerCount())
+
+    list1.append(dbModel.getCollegeCount())
+    list1.append(dbModel.getDeptCount())
+
+    print("\n\nlist1---------------",list1)
+   # collegeList=dbModel.getCollegesList()
+    #print("CollegesList---------------->>>>>",collegeList)
+    return json.dumps(list1)
+
+
 ###################################################################################
 
 @app.route('/getCourseName',methods = ["GET"])

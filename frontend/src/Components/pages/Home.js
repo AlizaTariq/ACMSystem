@@ -14,65 +14,49 @@ import axios from "axios";
 // import ChartComponent from './ChartComponent';
 import React, { useEffect, useState } from "react";
 const UserData = () => {
-  const [data, setData] = useState([]);
-  const [myData, setmyData] = useState([]);
   const accessToken = localStorage.getItem("access_token");
   const navigate = useNavigate();
-  const [duties, setDuties] = useState([]);
   const [values, setSearchValue] = useState("");
-   const [currentPage, setCurrentPage] = useState(1);
+
+  const [rankedExmList, setRankedExmList] = useState([]);
+  const [collegesList, setCollegesList] = useState([]);
+  const [countDetail, setCountDetail] = useState([]);
+
+  const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(3); // Set the number of items to display per page
   // Logic to calculate the current items to display based on current page and itemsPerPage
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = duties.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = rankedExmList.slice(indexOfFirstItem, indexOfLastItem);
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-
-  // const accessToken = localStorage.getItem("access_token");
-
-  //not default export to expot it use {Banner}
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const response = await fetch("http://localhost:3000/userdata");
-  //     const json = await response.json();
-  //     setData(json);
-  //   }
-  //   fetchData();
-  // }, []);
   useEffect(() => {
-    const retrieve = async () => {
-      const response = await axios.get(
-        "http://127.0.0.1:5000/getNotAssignedDuties"
-      );
-      setDuties(response.data);
-    };
-    retrieve();
-  }, []);
-
-  useEffect(() => {
-    fetch("/userdata")
+    fetch("http://127.0.0.1:5000/getRankedExmList")
       .then((response) => response.json())
-      .then((json) => {
-        setData(json);
-        console.log("data = ", json);
-      });
+      .then((data) => {
+        setRankedExmList(data);
+      })
+      .then((data1) => console.log("Ranked Exm List ", rankedExmList));
   }, []);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/data", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: "John",
-        password: "ABC123",
-      }),
-    });
+    fetch("http://127.0.0.1:5000/getAffiliatedColleges")
+      .then((response) => response.json())
+      .then((data) => {
+        setCollegesList(data);
+      })
+      .then((data1) => console.log("Affiliated College List ", collegesList));
+  }, []);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/getCountDetail")
+      .then((response) => response.json())
+      .then((data) => {
+        setCountDetail(data);
+      })
+      .then((data1) => console.log("getCountDetail List ", rankedExmList));
   }, []);
 
   if (!accessToken) {
@@ -97,7 +81,18 @@ const UserData = () => {
                   <i className="fas fa-users"></i>
                 </div>
                 <div className="mb-4" style={{ float: "left" }}>
-                  <h5 className="card-title mb-0">All Examiner</h5>
+                  <h5 className="card-title mb-0">
+                    Total practical duty : {countDetail[0]}
+                    <br />
+                    Prac Not assigned : {countDetail[1]}
+                    <br />
+                    Prac Pending : {countDetail[2]}
+                    <br />
+                    Prac Accepted :{countDetail[3]}
+                    <br />
+                    Prac Rejected : {countDetail[4]}
+                    <br />
+                  </h5>
                   <h1>1236</h1>
                 </div>
               </div>
@@ -109,7 +104,12 @@ const UserData = () => {
                   <i className="fas fa-book-reader"></i>
                 </div>
                 <div className="mb-4" style={{ float: "left" }}>
-                  <h5 className="card-title mb-0">All Examiner</h5>
+                  <h5 className="card-title mb-0">
+                    Total Exam Duty : {countDetail[5]}
+                    <br />
+                    Total Examiners : {countDetail[6]}
+                    <br />
+                  </h5>
                   <h1>1236</h1>
                 </div>
               </div>
@@ -120,83 +120,84 @@ const UserData = () => {
                   <i className="fas fa-users"></i>
                 </div>
                 <div className="mb-4" style={{ float: "left" }}>
-                  <h5 className="card-title mb-0">All Examiner</h5>
+                  <h5 className="card-title mb-0">
+                    College Count : {countDetail[7]}
+                    <br />
+                    Departments Count : {countDetail[8]}
+                    <br />
+                  </h5>
                   <h1>1236</h1>
                 </div>
               </div>
             </div>
-           
           </div>
-     
-          <div className="grid-container grid-containers" style={{  flex: "1", margin: "14px"}}>
-             <div className="card  l-bg-blue-dark" style={{ height: "280px", margin: "14px"   }}>
-              <div className="card-statistic-3 p-3">
-              <table className="table">
-              {/* Table header */}
-              <thead>
-                <tr style={{ color:"white" }}>
-                  <td>College</td>
-                  <td>Department</td>
-                  <td>Batch</td>
-                </tr>
-              </thead>
-              <tbody>
-              {currentItems
-                ? currentItems
-                    .map((item) => (
-                      <tr
-                        style={{ border: "1px" }}
-                        key={item[0]}
-                        id={item[0]}
-                          
-                      >
-                        <td className="tableText">{item[3]}</td>
-                        <td className="tableText">{item[4]}</td>
-                        <td className="tableText">{item[5]}</td>
-                        
-                        
-                      </tr>
-                    ))
-                : "Loading..."}
-            </tbody>
 
-              </table>
-              <Pagination
-            pageCount={Math.ceil(duties.length / itemsPerPage)} // Calculate total number of pages
-            handlePageChange={handlePageChange} // Pass the handlePageChange function as a prop
-          />
+          <div
+            className="grid-container grid-containers"
+            style={{ flex: "1", margin: "14px" }}
+          >
+            <div
+              className="card  l-bg-blue-dark"
+              style={{ height: "280px", margin: "14px" }}
+            >
+              <div className="card-statistic-3 p-3">
+                <table className="table">
+                  {/* Table header */}
+                  <thead>
+                    <tr style={{ color: "white" }}>
+                      <td>College</td>
+                      <td>Department</td>
+                      <td>Batch</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {currentItems
+                      ? currentItems.map((item) => (
+                          <tr
+                            style={{ border: "1px" }}
+                            key={item[0]}
+                            id={item[0]}
+                          >
+                            <td className="tableText">{item[2]}</td>
+                            <td className="tableText">{item[3]}</td>
+                            <td className="tableText">{item[4]}</td>
+                          </tr>
+                        ))
+                      : "Loading..."}
+                  </tbody>
+                </table>
+                <Pagination
+                  pageCount={Math.ceil(rankedExmList.length / itemsPerPage)} // Calculate total number of pages
+                  handlePageChange={handlePageChange} // Pass the handlePageChange function as a prop
+                />
               </div>
             </div>
-            <div className="card  l-bg-blue-dark" style={{ height: "280px", margin: "14px "  }}>
+            <div
+              className="card  l-bg-blue-dark"
+              style={{ height: "280px", margin: "14px " }}
+            >
               <div className="card-statistic-3 p-3">
-              <table className="table">
-              {/* Table header */}
-              <thead>
-                <tr style={{ color:"white" }}>
-                  <td>Top 5 Ranked Examiner</td>
-                </tr>
-              </thead>
-              <tbody>
-              {currentItems
-                ? currentItems
-                    .map((item) => (
-                      <tr
-                        style={{ border: "1px" }}
-                        key={item[0]}
-                        id={item[0]}
-                          
-                      >
-                        <td className="tableText">{item[3]}</td>
-                        
-                        
-                      </tr>
-                    ))
-                : "Loading..."}
-            </tbody>
-
-              </table>
-              
-              
+                <table className="table">
+                  {/* Table header */}
+                  <thead>
+                    <tr style={{ color: "white" }}>
+                      <td>Top 5 Ranked Examiner</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {currentItems
+                      ? currentItems.map((item) => (
+                          <tr
+                            style={{ border: "1px" }}
+                            key={item[0]}
+                            id={item[0]}
+                          >
+                            <td className="tableText">{item[3]}</td>
+                          </tr>
+                        ))
+                      : "Loading..."}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -207,14 +208,3 @@ const UserData = () => {
 };
 
 export default UserData;
-
-// const Home = () => {
-//   return (
-//     <div>
-//       <h1>Home</h1>
-//       <div>Have some content</div>
-//     </div>
-//   );
-// };
-
-// export default Home;
