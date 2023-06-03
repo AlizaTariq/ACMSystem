@@ -41,6 +41,17 @@ c
     grid-template-columns: repeat(3, 1fr);
   }
 }
+@media only screen and (min-width: 992px) {
+  .grid-containers {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .grid-containers {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
 .l-bg-cherry {
   background: linear-gradient(to right, #493240, #f09) !important;
