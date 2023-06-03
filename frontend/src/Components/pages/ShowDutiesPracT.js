@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Pagination from "./Pagination";
 import Home from "./Home";
+import axios from "axios";
 import ShowDutyDetail from "./ShowDutyDetail";
 import "../css/ShowDutiesPracT.css";
 import Login from "./Login";
@@ -18,24 +19,39 @@ export default function ShowDutiesPracT() {
   const [query, setQuery] = useState("");
   const accessToken = localStorage.getItem("access_token");
 
+  // useEffect(() => {
+  //   fetch("http://127.0.0.1:5000/getAllPraticalList")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setList1(data);
+  //       setFilteredList(data);
+  //     })
+  //     .then(() => console.log("data dtt--", list1));
+  // }, []);
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/getAllPraticalList")
-      .then((response) => response.json())
-      .then((data) => {
-        setList1(data);
-        setFilteredList(data);
-      })
-      .then(() => console.log("data dtt--", list1));
-  }, []);
+    const retrieve = async () => {
+      const response = await axios.get(
+        "http://127.0.0.1:5000/getAllPraticalList"
+      );
+      setList1(response.data);
+      setFilteredList(response.data);
+      console.log(list1);
 
+      // setData(response.data);
+    };
+    retrieve();
+  }, []);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const totalPages = Math.ceil(filteredList.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = filteredList.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = list1.slice(indexOfFirstItem, indexOfLastItem);
+  const [serialNumber, setSerialNumber] = useState(1);
 
   const handlePageChange = (pageNumber) => {
+    // {console.log(list1.length)}
+    setSerialNumber((pageNumber - 1) * itemsPerPage + 1);
     setCurrentPage(pageNumber);
   };
 
@@ -98,6 +114,7 @@ export default function ShowDutiesPracT() {
               {/* Table header */}
               <thead>
                 <tr className="headingTable">
+                  <td>Sr. No</td>
                   <td>Course Code</td>
                   <td>Course Name</td>
                   <td>College</td>
@@ -108,9 +125,15 @@ export default function ShowDutiesPracT() {
               </thead>
               {/* Table body */}
               <tbody>
-                {currentItems.length > 0 ? (
-                  currentItems.map((item) => (
-                    <tr style={{ border: "1px" }} key={item[0]} id={item[0]}>
+                {currentItems.length ? (
+                  currentItems.map((item, index) => (
+                    <tr
+                      style={{ border: "1px" }}
+                      key={serialNumber + index}
+                      id={serialNumber + index}
+                    >
+                      <td className="tableText">{serialNumber + index}</td>
+
                       <td className="tableText">{item[3]}</td>
                       <td className="tableText">{item[4]}</td>
                       <td className="tableText">{item[1]}</td>
@@ -134,10 +157,14 @@ export default function ShowDutiesPracT() {
                 )}
               </tbody>
             </table>
-            <Pagination
-              pageCount={Math.ceil(list1.length / itemsPerPage)} // Calculate total number of pages
-              handlePageChange={handlePageChange} // Pass the handlePageChange function as a prop
-            />
+            {list1.length > 10 ? (
+              <Pagination
+                pageCount={Math.ceil(list1.length / itemsPerPage)} // Calculate total number of pages
+                handlePageChange={handlePageChange} // Pass the handlePageChange function as a prop
+              />
+            ) : (
+              <tr>{/* <td colSpan="6">Loading...</td> */}</tr>
+            )}
           </div>
         </div>
       )}

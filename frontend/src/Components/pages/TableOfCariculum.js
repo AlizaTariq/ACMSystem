@@ -32,6 +32,7 @@ export default function TableOfCariculum() {
 
   // Function to handle page change
   const handlePageChange = (pageNumber) => {
+    console.log(data_get.length);
     setCurrentPage(pageNumber);
   };
   function addfile(event) {
@@ -99,7 +100,7 @@ export default function TableOfCariculum() {
 
   return (
     <>
-       <NavBar/>
+      <NavBar />
       <div className="container">
         <div className="d-flex flex-row-reverse bd-highlight">
           <p className="form-inline">
@@ -185,10 +186,15 @@ export default function TableOfCariculum() {
                 : "Loading..."}
             </tbody>
           </table>
-          <Pagination
-            pageCount={Math.ceil(data_get.length / itemsPerPage)} // Calculate total number of pages
-            handlePageChange={handlePageChange} // Pass the handlePageChange function as a prop
-          />
+
+          {data_get.length > 7 ? (
+            <Pagination
+              pageCount={Math.ceil(data_get.length / itemsPerPage)} // Calculate total number of pages
+              handlePageChange={handlePageChange} // Pass the handlePageChange function as a prop
+            />
+          ) : (
+            <tr>{/* <td colSpan="6">Loading...</td> */}</tr>
+          )}
         </div>
       </div>
 

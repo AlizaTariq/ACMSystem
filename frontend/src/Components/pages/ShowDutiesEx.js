@@ -147,10 +147,15 @@ export default function ShowDutiesEx() {
                 : "Loading..."}
             </tbody>
           </table>
-          <Pagination
-            pageCount={Math.ceil(duties.length / itemsPerPage)} // Calculate total number of pages
-            handlePageChange={handlePageChange} // Pass the handlePageChange function as a prop
-          />
+
+          {duties.length > 7 ? (
+            <Pagination
+              pageCount={Math.ceil(duties.length / itemsPerPage)} // Calculate total number of pages
+              handlePageChange={handlePageChange} // Pass the handlePageChange function as a prop
+            />
+          ) : (
+            <tr>{/* <td colSpan="6">Loading...</td> */}</tr>
+          )}
         </div>
       </div>
       <div
