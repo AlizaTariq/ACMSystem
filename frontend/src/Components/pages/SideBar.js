@@ -1,109 +1,66 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
-
-//import username from "../images/profilepic-2.jpg";
-
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import "../css/SideBar.css";
-
-// import icon1 from "./images/"
-
-import { useState } from "react";
+import {
+  CDBSidebar,
+  CDBSidebarContent,
+  CDBSidebarFooter,
+  CDBSidebarHeader,
+  CDBSidebarMenu,
+  CDBSidebarMenuItem,
+} from "cdbreact";
+import { NavLink } from "react-router-dom";
 
 const SideBar = () => {
-  const [isExpended, setExpendedState] = useState(false);
-  const menuItems = [
-    {
-      text: "Dashboard",
-      icon: "icons/grid.svg",
-    },
-    {
-      text: "Duties",
-      icon: "icons/folder.svg",
-    },
-    {
-      text: "Profile",
-      icon: "icons/user.svg",
-    },
-    {
-      text: "Notification",
-      icon: "icons/message.svg",
-    },
-  ];
-
   return (
     <div
-      className={
-        isExpended
-          ? "side-nav-container"
-          : "side-nav-container side-nav-container-NX"
-      }
+      style={{ display: "flex", height: "100vh", overflow: "scroll initial" }}
     >
-      <div className="nav-upper">
-        <div className="nav-heading">
-          {isExpended && (
-            <div className="nav-brand">
-              <img src="icons/logo.svg" alt="nav brand" />
-              <h2>AdminEnd</h2>
-            </div>
-          )}
-          <button
-            className={
-              isExpended ? "hamburger hamburger-in" : "hamburger hamburger-out"
-            }
-            onClick={() => setExpendedState(!isExpended)}
+      <CDBSidebar textColor="#fff" backgroundColor="#333">
+        <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
+          <a
+            href="/"
+            className="text-decoration-none"
+            style={{ color: "inherit" }}
           >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-        </div>
-        <div className="nav-menu">
-          {menuItems.map(({ text, icon }) => (
-            <a
-              className={isExpended ? "menu-item" : "menu-item menu-item-NX"}
-              href="#"
-            >
-              <img
-                className="menu-item-icon"
-                src={icon}
-                alt="hey"
-                srcset=""
-              ></img>
-              {isExpended && <p>{text}</p>}
-              {!isExpended && <div className="tooltip">{text}</div>}
+            Admin Portal
+          </a>
+        </CDBSidebarHeader>
+        <CDBSidebarContent className="sidebar-content">
+          <CDBSidebarMenu>
+            <a href="/" activeclassname="activeClicked">
+              <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </a>
-          ))}
-        </div>
-      </div>
+            <a href="/TableOfCariculum" activeclassname="activeClicked">
+              <CDBSidebarMenuItem icon="table">Carriculum</CDBSidebarMenuItem>
+            </a>
+            {/* <a href="/profile" activeclassname="activeClicked">
+                      <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
+                    </a> */}
+            <a href="/ShowDuties" activeclassname="activeClicked">
+              <CDBSidebarMenuItem icon="paste">Duties</CDBSidebarMenuItem>
+            </a>
+            <NavLink
+              href="/hero404"
+              target="_blank"
+              activeclassname="activeClicked"
+            >
+              <CDBSidebarMenuItem icon="exclamation-circle">
+                404 page
+              </CDBSidebarMenuItem>
+            </NavLink>
+          </CDBSidebarMenu>
+        </CDBSidebarContent>
 
-      <div className="na-footer">
-        {isExpended && (
-          <div className="na-details">
-            <img
-              className="nav-footer-avatar"
-              src="icons/admin-avatar.svg"
-              alt=""
-              srcset=""
-            ></img>
-            <div className="na-footer-info">
-              <p className="na-footer-user-name">User</p>
-              <p className="na-footer-user-position">Admin</p>
-            </div>
+        <CDBSidebarFooter style={{ textAlign: "center" }}>
+          <div
+            style={{
+              padding: "20px 5px",
+            }}
+          >
+            {" "}
+            <b>Affiliated College Management System</b>
           </div>
-        )}
-        <img
-          className="logout-icon"
-          src="icons/logout.svg"
-          alt="helo"
-          srcset=""
-        ></img>
-      </div>
+        </CDBSidebarFooter>
+      </CDBSidebar>
     </div>
   );
 };

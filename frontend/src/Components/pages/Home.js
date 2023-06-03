@@ -5,6 +5,7 @@ import NavBar from "./NavBar";
 import GenerateDuties from "./GenerateDuties";
 import Login from "./Login";
 import "../css/home.css";
+import svgimg from "../images/sidepanel.png";
 // export const Banner = () => {
 //   return <div>Some banner stuff</div>;
 // };
@@ -53,68 +54,55 @@ const UserData = () => {
   }
 
   return (
-    <div>
-      {/* <SideBar /> */}
+    <>
       <NavBar />
-      <div>
-        <div className="grid-container">
-          <div className="card">
-            <div class="card l-bg-cherry">
-              <div class="card-statistic-3 p-4">
-                <div class="mb-4">
-                  <h5 class="card-title mb-0">All Examiner</h5>
-                </div>
+      <div style={{ display: "flex" }}>
+        {/* <div ></div> */}
+        <div>
+          <SideBar></SideBar>
+        </div>
+        <div style={{ flex: "1", margin: "14px" }} className="grid-container">
+          {/* <div className="card"> */}
+          <div class="card l-bg-cherry" style={{ height: "142px" }}>
+            <div class="card-statistic-3 p-3">
+              <div class="card-icon card-icon-large">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="mb-4" style={{ float: "left" }}>
+                <h5 class="card-title mb-0">All Examiner</h5>
+                <h1>1236</h1>
               </div>
             </div>
           </div>
-          <div className="card">
-            <div class="card l-bg-blue-dark">
-              <div class="card-statistic-3 p-4">
-                <div class="mb-4">
-                  <h5 class="card-title mb-0">Carriculum</h5>
-                </div>
+          {/* </div> */}
+          {/* <div className="card"> */}
+          <div class="card l-bg-orange-dark" style={{ height: "142px" }}>
+            <div class="card-statistic-3 p-3">
+              <div class="card-icon card-icon-large">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="mb-4" style={{ float: "left" }}>
+                <h5 class="card-title mb-0">All Examiner</h5>
+                <h1>1236</h1>
               </div>
             </div>
           </div>
-          <div className="card">
-            <div class="card l-bg-green-dark">
-              <div class="card-statistic-3 p-4">
-                <div class="mb-4">
-                  <h5 class="card-title mb-0">Duties</h5>
-                </div>
+          {/* </div> */}
+          {/* <div className="card"> */}
+          <div class="card  l-bg-blue-dark" style={{ height: "142px" }}>
+            <div class="card-statistic-3 p-3">
+              <div class="card-icon card-icon-large">
+                <i class="fas fa-users"></i>
               </div>
-            </div>
-          </div>
-          <div className="card">
-            <div class="card l-bg-orange-dark">
-              <div class="card-statistic-3 p-4">
-                <div class="mb-4">
-                  <h5 class="card-title mb-0">College Review</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="card">
-            <div class="card l-bg-orange-dark">
-              <div class="card-statistic-3 p-4">
-                <div class="mb-4">
-                  <h5 class="card-title mb-0">Teacher Review</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="card">
-            <div class="card l-bg-orange-dark">
-              <div class="card-statistic-3 p-4">
-                <div class="mb-4">
-                  <h5 class="card-title mb-0">College Review</h5>
-                </div>
+              <div class="mb-4" style={{ float: "left" }}>
+                <h5 class="card-title mb-0">All Examiner</h5>
+                <h1>1236</h1>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -129,4 +117,4 @@ export default UserData;
 //   );
 // };
 
-// export default Home;
+// export default Home
