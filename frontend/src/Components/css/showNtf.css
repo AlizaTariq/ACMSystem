@@ -46,3 +46,10 @@
   font-size: large;
   font-weight: bold;
 }
+
+#emptyNtf {
+  color: rgba(2, 250, 23, 0.897);
+  font-size: 30px;
+  font-family: UnitedKings_PERSONAL_USE_ONLY Verdana;
+  margin: 10%;
+}

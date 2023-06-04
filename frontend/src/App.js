@@ -130,58 +130,6 @@ function App() {
           <Route path="FORMPDF" element={<FORMPDF></FORMPDF>}></Route>
         </Routes>
       </Router>
-
-      {/* <div className="App">
-        <Form />
-      </div> */}
-
-      {/* <div className="App">
-        <header className="App-header"> */}
-      {/* { Calling a data from setdata for showing } */}
-      {/* <h1>USER LOGIN IS </h1>
-          <p>{data1.myStatus}</p>
-          <p>{data1.myData}</p>
-        </header>
-      </div> */}
-      {/* 
-      <Router>
-        <div style={{ display: "flex" }}>
-          <div style={{ flex: 2 }}>
-            <SideBarEx></SideBarEx>
-          </div> */}
-
-      {/* <Routes>
-            <Route path="/" element={<Createduties />} />
-            {/* <Route path="/" element={<SideBar/>} /> */}
-      {/* <Route
-              path="/CreateAndSendDuty"
-              element={<CreateAndSendDuty></CreateAndSendDuty>}
-            ></Route>
-            <Route
-              path="CourseCard"
-              element={<CourseCard></CourseCard>}
-            ></Route>
-            <Route path="FORMPDF" element={<FORMPDF></FORMPDF>}></Route>
-            <Route
-              path="OtherDuties"
-              element={<OtherDuties></OtherDuties>}
-            ></Route>
-            {/* <Route */}
-      {/* path="DutyDetailsEx"
-              element={<DutyDetailsEx></DutyDetailsEx>}
-            ></Route> */}
-      {/* <Route
-              path="ShowDutiesEx"
-              element={<ShowDutiesEx></ShowDutiesEx>}
-            ></Route>  */}
-      {/* <Route
-              path="/TableOfCariculum"
-              element={<TableOfCariculum></TableOfCariculum>}
-            ></Route>
-            <Route path="FORMPDF" element={<FORMPDF></FORMPDF>}></Route>
-          </Routes> */}
-      {/* </div>
-      </Router>  */}
     </>
   );
 }

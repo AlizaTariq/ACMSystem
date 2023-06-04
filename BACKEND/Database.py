@@ -849,8 +849,7 @@ class DatabaseModel:
             if cursor!=None:
                 cursor.close()
 
-    
-    #Get Prac Duty Count
+    #Get Practical Duty Count
     def getPracDutyCount(self):
         try:
             if self.connection!=None:
@@ -860,7 +859,7 @@ class DatabaseModel:
                 clgList=cursor.fetchall()
                 if clgList is not None:
                     return clgList[0][0]
-                return clgList
+                return 0
 
         except Exception as e:
             print("Exception in getPracDutyCount",str(e))
@@ -868,18 +867,18 @@ class DatabaseModel:
             if cursor!=None:
                 cursor.close()
         
-         #Get Prac Duty Count
+    #Get Practical Duty Count of different status    
     def getPracDutyCountType(self,typePrac):
         try:
             if self.connection!=None:
                 cursor=self.connection.cursor()
-                query="select * from practical_duty where prac_duty_status=%s"
+                query="select COUNT(*) from practical_duty where prac_duty_status=%s"
                 args=(typePrac,)
                 cursor.execute(query,args)
-                clgList=cursor.fetchall()
-                if clgList is not None:
-                    return clgList[0][0]
-                return clgList
+                countList=cursor.fetchall()
+                if countList is not None:
+                    return countList[0][0]
+                return 0
 
         except Exception as e:
             print("Exception in getPracDutyCountType",str(e))
@@ -887,17 +886,17 @@ class DatabaseModel:
             if cursor!=None:
                 cursor.close()
     
-     #Get Prac Duty Count
+     #Get Total Exam Duty Count
     def getExamDutyCount(self):
         try:
             if self.connection!=None:
                 cursor=self.connection.cursor()
                 query="select COUNT(*) from exam_duty;"
                 cursor.execute(query)
-                clgList=cursor.fetchall()
-                if clgList is not None:
-                    return clgList[0][0]
-                return clgList
+                countList=cursor.fetchall()
+                if countList is not None:
+                    return countList[0][0]
+                return 0
 
         except Exception as e:
             print("Exception in getExamDutyCount",str(e))
@@ -905,18 +904,17 @@ class DatabaseModel:
             if cursor!=None:
                 cursor.close()
 
-    
-     #Get Prac Duty Count
+     #Get Total Examiner Count
     def getExaminerCount(self):
         try:
             if self.connection!=None:
                 cursor=self.connection.cursor()
                 query="select COUNT(*) from examiner;"
                 cursor.execute(query)
-                clgList=cursor.fetchall()
-                if clgList is not None:
-                    return clgList[0][0]
-                return clgList
+                countList=cursor.fetchall()
+                if countList is not None:
+                    return countList[0][0]
+                return 0
 
         except Exception as e:
             print("Exception in getExaminerCount",str(e))
@@ -924,17 +922,17 @@ class DatabaseModel:
             if cursor!=None:
                 cursor.close()
     
-    #Get Prac Duty Count
+    #Get Affiliated college count
     def getCollegeCount(self):
         try:
             if self.connection!=None:
                 cursor=self.connection.cursor()
                 query="select COUNT(*) from affiliated_colleges;"
                 cursor.execute(query)
-                clgList=cursor.fetchall()
-                if clgList is not None:
-                    return clgList[0][0]
-                return clgList
+                countList=cursor.fetchall()
+                if countList is not None:
+                    return countList[0][0]
+                return 0
 
         except Exception as e:
             print("Exception in getCollegeCount",str(e))
@@ -942,17 +940,17 @@ class DatabaseModel:
             if cursor!=None:
                 cursor.close()
     
-    #Get Prac Duty Count
+    #Get Count of total Departments
     def getDeptCount(self):
         try:
             if self.connection!=None:
                 cursor=self.connection.cursor()
                 query="select COUNT(*) from departments;"
                 cursor.execute(query)
-                clgList=cursor.fetchall()
-                if clgList is not None:
-                    return clgList[0][0]
-                return clgList
+                countList=cursor.fetchall()
+                if countList is not None:
+                    return countList[0][0]
+                return 0
 
         except Exception as e:
             print("Exception in getDeptCount",str(e))

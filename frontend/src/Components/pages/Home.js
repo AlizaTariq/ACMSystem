@@ -1,5 +1,7 @@
 // import React, { useState, useEffect } from "react";
 import SideBar from "./SideBar";
+import LineGraph from "./LineGraph";
+
 import { useNavigate, createSearchParams } from "react-router-dom";
 import NavBar from "./NavBar";
 import GenerateDuties from "./GenerateDuties";
@@ -8,11 +10,14 @@ import "../css/home.css";
 import svgimg from "../images/sidepanel.png";
 import Pagination from "./Pagination";
 import axios from "axios";
-// export const Banner = () => {
-//   return <div>Some banner stuff</div>;
-// };
-// import ChartComponent from './ChartComponent';
-import React, { useEffect, useState } from "react";
+
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import React, { useEffect, useState, useRef } from "react";
+
 const UserData = () => {
   const accessToken = localStorage.getItem("access_token");
   const navigate = useNavigate();
@@ -21,6 +26,9 @@ const UserData = () => {
   const [rankedExmList, setRankedExmList] = useState([]);
   const [collegesList, setCollegesList] = useState([]);
   const [countDetail, setCountDetail] = useState([]);
+
+  const [open, setOpen] = useState(false);
+  const [dutyStatus, setDutyStatus] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(3); // Set the number of items to display per page
@@ -59,6 +67,24 @@ const UserData = () => {
       .then((data1) => console.log("getCountDetail List ", rankedExmList));
   }, []);
 
+  const handleButtonClick = () => {
+    fetch("/generatePracDuties")
+      .then((response) => response.json())
+      .then((data) => {
+        const { success } = data;
+        setDutyStatus(
+          success ? "Duties generated successfully." : "Duties not generated."
+        );
+        setOpen(true);
+      })
+      .catch((error) => console.error("Error:", error));
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setDutyStatus("");
+  };
+
   if (!accessToken) {
     console.log("Logouttt");
     return <Login />; // Render the Login component if access token doesn't exist
@@ -74,6 +100,12 @@ const UserData = () => {
 
         <div style={{ flex: "1" }}>
           <NavBar />
+
+          {/* <div>
+            <h1>Line Graph Example</h1>
+            <LineGraph />
+          </div> */}
+
           <div className="grid-container" style={{ flex: "1", margin: "14px" }}>
             <div className="card l-bg-cherry" style={{ height: "142px" }}>
               <div className="card-statistic-3 p-3">
@@ -109,24 +141,44 @@ const UserData = () => {
                     <br />
                     Total Examiners : {countDetail[6]}
                     <br />
-                  </h5>
-                  <h1>1236</h1>
-                </div>
-              </div>
-            </div>
-            <div className="card  l-bg-blue-dark" style={{ height: "142px" }}>
-              <div className="card-statistic-3 p-3">
-                <div className="card-icon card-icon-large">
-                  <i className="fas fa-users"></i>
-                </div>
-                <div className="mb-4" style={{ float: "left" }}>
-                  <h5 className="card-title mb-0">
                     College Count : {countDetail[7]}
                     <br />
                     Departments Count : {countDetail[8]}
                     <br />
                   </h5>
                   <h1>1236</h1>
+                </div>
+              </div>
+            </div>
+
+            <div className="card  dutybtndiv l-bg-blue-dark">
+              <Button
+                variant="contained"
+                id="genDutyBtn"
+                onClick={handleButtonClick}
+              >
+                Generate Duties
+              </Button>
+              <div className="card-statistic-3 p-3">
+                <div className="card-icon card-icon-large">
+                  <i className="fas fa-users"></i>
+                </div>
+
+                <div className="mb-0">
+                  <center>
+                    <h1>Generate Practical Duties</h1>
+                  </center>
+                  <h5 className="card-title mb-0">
+                    <div>
+                      <Dialog open={open} onClose={handleClose}>
+                        <DialogTitle>Duty Status</DialogTitle>
+                        <DialogContent>{dutyStatus}</DialogContent>
+                        <DialogActions>
+                          <Button onClick={handleClose}>Close</Button>
+                        </DialogActions>
+                      </Dialog>
+                    </div>
+                  </h5>
                 </div>
               </div>
             </div>

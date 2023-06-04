@@ -14,6 +14,8 @@ import axios from "axios";
 import Login from "./Login";
 import Schedule from "./Schedule";
 import NavBar from "./NavBar";
+import { useNavigate, createSearchParams } from "react-router-dom";
+
 const SendDuty = (props) => {
   const [teacherName, setTeacherName] = useState(
     props.ClgCrsData.examiners[0][1]
@@ -31,6 +33,7 @@ const SendDuty = (props) => {
   const [sendValue, setSendValue] = useState(false);
   const [backBtnValue, setBackBtnValue] = useState(false);
   const accessToken = localStorage.getItem("access_token");
+  const navigate = useNavigate();
 
   const handleTeacherNameChange = (event) => {
     const selectedName = event.target.value;
@@ -116,7 +119,7 @@ const SendDuty = (props) => {
 
   return (
     <>
-     <NavBar/>
+      <NavBar />
       <div className="SchedulePage">
         <br />
         <br />
@@ -202,12 +205,6 @@ const SendDuty = (props) => {
                         </Form.Select>
                       </Form.Group>
                     </Col>
-
-                    {/* <Col lg="4">
-                      <br />
-                      <Button className="schButton">View Profile</Button>{" "}
-                      <Button className="schButton">View Duties</Button>{" "}
-                    </Col> */}
                   </Row>
 
                   <Row>
@@ -219,7 +216,6 @@ const SendDuty = (props) => {
                           value={teacherEmail}
                           name="teacherEmail"
                           onChange={handleTeacherEmailChange}
-                          //   onchange={handleTeacherEmailChange}
                         >
                           {props.ClgCrsData.examiners.map((item, index) => {
                             return (
@@ -233,7 +229,14 @@ const SendDuty = (props) => {
                     </Col>
                     <Col lg="6">
                       <br />
-                      <Button className="schButton">View Profile</Button>{" "}
+                      <Button
+                        className="schButton"
+                        onClick={() => {
+                          navigate("/Profile");
+                        }}
+                      >
+                        View Profile
+                      </Button>{" "}
                     </Col>
                   </Row>
 
@@ -264,10 +267,9 @@ const SendDuty = (props) => {
                         className="mb-3"
                         controlId="formBasicCheckbox"
                       >
-                        <Form.Check
-                          type="checkbox"
-                          label="Also Notify Through Email"
-                        />
+                        <center>
+                          <h5>Also Notify Through Email</h5>
+                        </center>
                       </Form.Group>
                     </Col>
                   </Row>

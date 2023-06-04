@@ -384,7 +384,7 @@ def getAffiliatedColleges():
 @app.route('/getCountDetail')
 def getCountDetail():
     list1=[]
-    #[48, 1026, 1045, 1022, 1052, 3, 5, 6, 2]
+    #[48, 27, 14, 6, 1, 3, 5, 6, 2]
     list1.append(dbModel.getPracDutyCount())
 
     list1.append(dbModel.getPracDutyCountType(0)) #not assigned
