@@ -25,7 +25,7 @@
     2. Now open pgAdmin and create new database ACMS.
     3. Right click on your ACMS database and click on Query Tool.
     4. Now copy the complete script provided in Databse/DB Script folder (ACMS Script.sql).
-    5. To import data in your database follow the following commands:
+    5.** To import data in your database follow the following commands:**
     
           1.  Go to pgAdimn -> File -> Preferences -> Path -> Binary paths.
           2.  From PostgreSQL Binary Path select your version (like PostgreSQL 15).
