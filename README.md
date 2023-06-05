@@ -15,8 +15,8 @@
     
     Run the following commands :
     1. cd frontend (In other terminal open frontend folder.)
-    2. pip install requirements.txt (To install all required packages.)
-    3. python server.py (To run.)
+    2. npm install  (To install all required packages.)
+    3. npm start (To run.)
     
 6. **Setup Database**
     
