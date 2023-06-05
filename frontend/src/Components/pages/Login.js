@@ -7,7 +7,7 @@ import { faUser, faLock } from "@fortawesome/fontawesome-free";
 import profilepic from "../images/avatar.svg";
 import AnimatedSVG from "./AnimatedSVG";
 import svgimg from "../images/sidepanel.png";
-
+import accessDenied from "../images/access-denied.png";
 // import { useSpring, animated } from "react-spring";
 //import { ReactComponent as AnimatedSVG } from "../images/loginSVGImage.svg";
 import Button from "@mui/material/Button";
@@ -176,11 +176,22 @@ export default function Login() {
           <div className="childT">
             <img id="immg" src={svgimg}></img>
           </div>
-          <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>LOGIN STATUS</DialogTitle>
-            <DialogContent>{dutyStatus}</DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose}>Close</Button>
+          <Dialog open={open} className="custom-dialog" onClose={handleClose}>
+            <div className="forcenterOne">
+              <img className="forcenter pic" src={accessDenied} alt="avatar" />
+            </div>
+            <DialogTitle className="dialogTitle">
+              <b>
+                <center>Login Status</center>
+              </b>
+            </DialogTitle>
+            <DialogContent>
+              <center>{dutyStatus}</center>
+            </DialogContent>
+            <DialogActions className="custom-dialog-actions">
+              <Button className="btnClose" onClick={handleClose}>
+                <b>Close</b>
+              </Button>
             </DialogActions>
           </Dialog>
         </div>

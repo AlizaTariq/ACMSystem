@@ -4,6 +4,8 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { useNavigate } from "react-router-dom";
+
 import "../css/NavBar.css";
 import "../css/common.css";
 
@@ -18,10 +20,18 @@ const handleLogoutBtn = () => {
 };
 
 function NavBar() {
+  const navigate = useNavigate();
+
   return (
     <Navbar expand="lg" className="NabBar1 navbar-white-text">
       <Container fluid>
-        <img src={adminpic} className="adminpic" />
+        <img
+          src={adminpic}
+          className="adminpic"
+          onClick={() => {
+            navigate("/home");
+          }}
+        />
 
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
@@ -37,9 +47,6 @@ function NavBar() {
               <NavDropdown.Item href="/showduties">
                 Practical Duties
               </NavDropdown.Item>
-              <NavDropdown.Item href="/showduties">
-                Generate Practical Duties
-              </NavDropdown.Item>
 
               <NavDropdown.Item href="/sendRequest">
                 Assign Practical Duties
@@ -53,7 +60,6 @@ function NavBar() {
             </NavDropdown>
 
             <Nav.Link href="/notifications">Notifications</Nav.Link>
-            <Nav.Link href="/Profile">Profile</Nav.Link>
             <Nav.Link href="/TableOfCariculum">Curriculum</Nav.Link>
             <NavDropdown title="Others" id="navbarScrollingDropdown2">
               <NavDropdown.Item href="/TeacherReview">
@@ -63,10 +69,6 @@ function NavBar() {
               <NavDropdown.Item href="/CollegeReview">
                 College Review
               </NavDropdown.Item>
-
-              <NavDropdown.Divider />
-
-              <NavDropdown.Item href="/SideBar">Side Bar</NavDropdown.Item>
             </NavDropdown>
           </Nav>
 

@@ -1,8 +1,6 @@
-// import React, { useState, useEffect } from "react";
 import SideBar from "./SideBar";
-import LineGraph from "./LineGraph";
 
-import { useNavigate, createSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
 import GenerateDuties from "./GenerateDuties";
 import Login from "./Login";
@@ -10,13 +8,18 @@ import "../css/home.css";
 import svgimg from "../images/sidepanel.png";
 import Pagination from "./Pagination";
 import axios from "axios";
-
+import username from "../images/profilepictures/profilepic-7.jpg";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import React, { useEffect, useState, useRef } from "react";
+
+import checkedHere from "../images/checked.png";
+import deleteHere from "../images/delete.png";
+
+import picHere from "../images/list.png";
 
 const UserData = () => {
   const accessToken = localStorage.getItem("access_token");
@@ -31,12 +34,15 @@ const UserData = () => {
   const [dutyStatus, setDutyStatus] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(3); // Set the number of items to display per page
-  // Logic to calculate the current items to display based on current page and itemsPerPage
+  const itemsPerPage = 4;
+  const totalPages = Math.ceil(rankedExmList.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = rankedExmList.slice(indexOfFirstItem, indexOfLastItem);
+  const [serialNumber, setSerialNumber] = useState(1);
+
   const handlePageChange = (pageNumber) => {
+    setSerialNumber((pageNumber - 1) * itemsPerPage + 1);
     setCurrentPage(pageNumber);
   };
 
@@ -73,7 +79,9 @@ const UserData = () => {
       .then((data) => {
         const { success } = data;
         setDutyStatus(
-          success ? "Duties generated successfully." : "Duties not generated."
+          success
+            ? "Duties generated successfully."
+            : "Duties already exist. You cannot generate again!"
         );
         setOpen(true);
       })
@@ -92,7 +100,6 @@ const UserData = () => {
 
   return (
     <>
-      {/* <ChartComponent /> */}
       <div style={{ display: "flex" }}>
         <div>
           <SideBar></SideBar>
@@ -100,11 +107,6 @@ const UserData = () => {
 
         <div style={{ flex: "1" }}>
           <NavBar />
-
-          {/* <div>
-            <h1>Line Graph Example</h1>
-            <LineGraph />
-          </div> */}
 
           <div className="grid-container" style={{ flex: "1", margin: "14px" }}>
             <div className="card l-bg-cherry" style={{ height: "142px" }}>
@@ -125,7 +127,6 @@ const UserData = () => {
                     Prac Rejected : {countDetail[4]}
                     <br />
                   </h5>
-                  <h1>1236</h1>
                 </div>
               </div>
             </div>
@@ -170,11 +171,46 @@ const UserData = () => {
                   </center>
                   <h5 className="card-title mb-0">
                     <div>
-                      <Dialog open={open} onClose={handleClose}>
-                        <DialogTitle>Duty Status</DialogTitle>
-                        <DialogContent>{dutyStatus}</DialogContent>
-                        <DialogActions>
-                          <Button onClick={handleClose}>Close</Button>
+                      <Dialog
+                        open={open}
+                        onClose={handleClose}
+                        className="custom-dialog"
+                      >
+                        <div className="forcenterOne">
+                          <img
+                            className="forcenter pic"
+                            src={picHere}
+                            alt="generateDuties-pic"
+                          />
+                        </div>
+
+                        {/* extra content added 196 - 208 otherwise comment it and use 191 - 193 instead */}
+                        {/* <DialogContent>
+          {
+            dutyStatus ? (
+              <div className="forcenterOne">
+              <img className="forcenter pic" src={deleteHere} alt="delete" />
+            </div>
+            ) : (
+              <div className="forcenterOne">
+              <img className="forcenter pic" src={checkedHere} alt="checked" />
+            </div>
+            )
+          }
+      </DialogContent> */}
+
+                        <DialogTitle className="dialogTitle">
+                          <b>
+                            <center>Duty Status</center>
+                          </b>
+                        </DialogTitle>
+                        <DialogContent>
+                          <center>{dutyStatus}</center>
+                        </DialogContent>
+                        <DialogActions className="custom-dialog-actions">
+                          <Button className="btnClose" onClick={handleClose}>
+                            <b>Close</b>
+                          </Button>
                         </DialogActions>
                       </Dialog>
                     </div>
@@ -190,16 +226,50 @@ const UserData = () => {
           >
             <div
               className="card  l-bg-blue-dark"
-              style={{ height: "280px", margin: "14px" }}
+              style={{ height: "380px", margin: "14px" }}
             >
               <div className="card-statistic-3 p-3">
+                <h1>Affiliated Colleges</h1>
                 <table className="table">
-                  {/* Table header */}
                   <thead>
                     <tr style={{ color: "white" }}>
-                      <td>College</td>
-                      <td>Department</td>
-                      <td>Batch</td>
+                      <td>Name</td>
+                      <td>Affiliated Year</td>
+                      <td>Student Count</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {collegesList
+                      ? collegesList.map((item) => (
+                          <tr
+                            style={{ border: "1px" }}
+                            key={item[0]}
+                            id={item[0]}
+                          >
+                            <td className="tableText">{item[5]}</td>
+                            <td className="tableText">{item[1]}</td>
+                            <td className="tableText">{item[3]}</td>
+                          </tr>
+                        ))
+                      : "Loading..."}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div
+              className="card  l-bg-blue-dark"
+              style={{ height: "380px", margin: "14px " }}
+            >
+              <div className="card-statistic-3 p-3">
+                <h1>Top 50 Ranked Examiner</h1>
+                <table className="table">
+                  <thead>
+                    <tr style={{ color: "white" }}>
+                      <td>Profile Picture</td>
+                      <td>Examiner Name</td>
+                      <td>Institution</td>
+                      <td>Ranking</td>
                     </tr>
                   </thead>
                   <tbody>
@@ -209,10 +279,16 @@ const UserData = () => {
                             style={{ border: "1px" }}
                             key={item[0]}
                             id={item[0]}
+                            onClick={() => {
+                              navigate("/Profile");
+                            }}
                           >
+                            <td className="tableText">
+                              <img variant="top" src={username} id="exmImg" />
+                            </td>
                             <td className="tableText">{item[2]}</td>
-                            <td className="tableText">{item[3]}</td>
                             <td className="tableText">{item[4]}</td>
+                            <td className="tableText">{item[6]}</td>
                           </tr>
                         ))
                       : "Loading..."}
@@ -222,34 +298,6 @@ const UserData = () => {
                   pageCount={Math.ceil(rankedExmList.length / itemsPerPage)} // Calculate total number of pages
                   handlePageChange={handlePageChange} // Pass the handlePageChange function as a prop
                 />
-              </div>
-            </div>
-            <div
-              className="card  l-bg-blue-dark"
-              style={{ height: "280px", margin: "14px " }}
-            >
-              <div className="card-statistic-3 p-3">
-                <table className="table">
-                  {/* Table header */}
-                  <thead>
-                    <tr style={{ color: "white" }}>
-                      <td>Top 5 Ranked Examiner</td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {currentItems
-                      ? currentItems.map((item) => (
-                          <tr
-                            style={{ border: "1px" }}
-                            key={item[0]}
-                            id={item[0]}
-                          >
-                            <td className="tableText">{item[3]}</td>
-                          </tr>
-                        ))
-                      : "Loading..."}
-                  </tbody>
-                </table>
               </div>
             </div>
           </div>

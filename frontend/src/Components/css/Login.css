@@ -77,3 +77,35 @@
   height: 100%;
   z-index: -1;
 }
+
+.forcenterOne {
+  align-items: center;
+  text-align: center;
+  padding-top: 2%;
+}
+.forcenterOne img {
+  width: 10%;
+  width: 10%;
+}
+/* .btnClose .MuiPaper-root{
+  padding:2%;
+  text-transform: lowercase;
+  color:  rgba(2, 250, 23, 0.897);
+} */
+
+.dialogTitle {
+  color: rgba(2, 250, 23, 0.897);
+}
+.custom-dialog-actions .btnClose {
+  text-transform: lowercase;
+  color: rgba(255, 0, 0, 0.897);
+}
+
+/* .custom-dialog {
+  background-color: red; /* Replace 'red' with the desired background color */
+
+.custom-dialog .MuiPaper-root {
+  background-color: rgb(3, 0, 19);
+  color: #fff;
+  border-radius: 10px;
+}

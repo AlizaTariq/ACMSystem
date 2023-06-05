@@ -109,14 +109,11 @@ const SideBar = () => {
             <a href="/" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </a>
+            <a href="/Profile" activeclassname="activeClicked">
+              <CDBSidebarMenuItem icon="user">Profile Page</CDBSidebarMenuItem>
+            </a>
             <a href="/TableOfCariculum" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="table">Carriculum</CDBSidebarMenuItem>
-            </a>
-            {/* <a href="/profile" activeclassname="activeClicked">
-                      <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
-                    </a> */}
-            <a href="/ShowDuties" activeclassname="activeClicked">
-              <CDBSidebarMenuItem icon="paste">Duties</CDBSidebarMenuItem>
             </a>
 
             <a href="/PracCollegeReview" activeclassname="activeClicked">
@@ -130,9 +127,9 @@ const SideBar = () => {
               </CDBSidebarMenuItem>
             </a>
 
-            <a activeclassname="activeClicked">
+            <a onClick={showModal} activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="paste">
-                <button onClick={showModal}>Teacher Review Form</button>
+                Teacher Feedback
                 <Modal
                   show={isOpen}
                   onHide={hideModal}
@@ -386,132 +383,6 @@ const SideBar = () => {
                 </Modal>
               </CDBSidebarMenuItem>
             </a>
-
-            {/* <a activeclassname="activeClicked">
-              <CDBSidebarMenuItem icon="paste">
-                <button onClick={showModal}>College Review Form</button>
-                <Modal
-                  show={isOpen}
-                  onHide={hideModal}
-                  onEnter={startTimer}
-                  onEntered={modalLoaded}
-                >
-                  <Modal.Header>
-                    <Modal.Title>College Review</Modal.Title>
-                  </Modal.Header>
-                 
-                  <Modal.Body>
-                    <Container fluid>
-                      <Row className="courseInfo">
-                        <Col lg="1"></Col>
-                        <Col lg="10">
-                          <Form>
-                            <Container>
-                              <div style={styles.container}>
-                                <div>
-                                  <label>
-                                    <b>Rate your Overall Experience </b>
-                                  </label>
-                                  <br></br>
-                                </div>
-                                <div style={styles.stars}>
-                                  {stars.map((_, index) => {
-                                    return (
-                                      <FaStar
-                                        key={index}
-                                        size={24}
-                                        stylw={{
-                                          marginRight: 10,
-                                          cursor: "pointer",
-                                        }}
-                                        color={
-                                          (hoverValue || currentValue) > index
-                                            ? colors.orange
-                                            : colors.grey
-                                        }
-                                        onClick={() => handleClick(index + 1)}
-                                        onMouseOver={() =>
-                                          handleMouseOver(index + 1)
-                                        }
-                                        onMouseLeave={handleMouseLeave}
-                                      />
-                                    );
-                                  })}
-                                </div>
-                              </div>
-
-                              <Row>
-                                <Col lg="6"></Col>
-                              </Row>
-                              <Row>
-                                <Col lg="12">
-                                  <br></br>
-                                  <Form.Group
-                                    className="mb-3"
-                                    controlId="exampleForm.ControlTextarea1"
-                                  >
-                                    <Form.Label>
-                                      <b>What's your Feedback</b>
-                                    </Form.Label>
-                                    <Form.Control as="textarea" rows={3} />
-                                  </Form.Group>
-                                </Col>
-                              </Row>
-                              <Row>
-                                <Col>
-                                  <Form.Group
-                                    className="mb-3"
-                                    controlId="formBasicCheckbox"
-                                  >
-                                    <Form.Check
-                                      type="checkbox"
-                                      label="Also Notify Through Email"
-                                    />
-                                  </Form.Group>
-                                </Col>
-                              </Row>
-                              <Row>
-                                <Col lg="10"></Col>
-                                <Col lg="2">
-                                  <br></br>
-                                  <Button className="schButton" type="submit">
-                                    Submit Review
-                                  </Button>
-                                </Col>
-                              </Row>
-                            </Container>
-                          </Form>
-                          <br />
-                        </Col>
-                        <Col lg="1"></Col>
-                      </Row>
-                    </Container>
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button
-                      className="schButton"
-                      onClick={hideModal}
-                      type="submit"
-                    >
-                      Cancel
-                    </Button>
-                    <Button className="schButton" type="submit">
-                      Submit Review
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
-              </CDBSidebarMenuItem>
-            </a> */}
-
-            <NavLink
-              href="/hero404"
-              target="_blank"
-              activeclassname="activeClicked"
-            >
-              <CDBSidebarMenuItem icon="exclamation-circle">
-                404 page
-              </CDBSidebarMenuItem>
-            </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
 
