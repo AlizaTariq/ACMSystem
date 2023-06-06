@@ -15,6 +15,7 @@ import Schedule from "./Schedule";
 import NavBar from "./NavBar";
 import "../css/PracTeacherFeedback.css";
 import Modal from "react-bootstrap/Modal";
+import Footer from "./Footer";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
@@ -60,33 +61,21 @@ const PracTeacherFeedback = (props) => {
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
+        className="modalBody"
       >
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className="bodyModal">
           <Modal.Title id="contained-modal-title-vcenter">
-            Modal heading
+            <b>Complain</b>
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <h4>Centered Modal</h4>
-          <h1>{currentRowFd[0]}</h1>
-          {"   "}
-
-          <h1>{currentRowFd[1]}</h1>
-          {"   "}
-
-          <h1>{currentRowFd[2]}</h1>
-          <br />
-          <h1>{currentRowFd[3]}</h1>
-          <br />
-          <h1>{currentRowFd[4]}</h1>
-          <br />
-          <h1>{currentRowFd[5]}</h1>
-          <br />
+        <Modal.Body className="bodyModal">
           <h1>{currentRowFd[6]}</h1>
           <br />
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
+        <Modal.Footer className="bodyModal">
+          <Button className="btnModalClose" onClick={props.onHide}>
+            Close
+          </Button>
         </Modal.Footer>
       </Modal>
     );
@@ -95,7 +84,7 @@ const PracTeacherFeedback = (props) => {
   return (
     <>
       <NavBar />
-      <div>Practical Teacher Feedback</div>
+      {/* <div>Practical Teacher Feedback</div> */}
 
       <div className="container">
         <div className="d-flex flex-row-reverse bd-highlight">
@@ -125,7 +114,7 @@ const PracTeacherFeedback = (props) => {
                 <td>Appartus</td>
                 <td>Teacher attitude</td>
                 <td>Rating</td>
-                <td>Complain</td>
+                <td></td>
               </tr>
             </thead>
             <tbody>
@@ -183,8 +172,8 @@ const PracTeacherFeedback = (props) => {
                         <td className="tableTextStars">
                           {generateStarRating(item[5])}
                         </td>
-                        <td className="tableTextOne">{item[6]}</td>
-                        <td>
+
+                        <td className="tableTexthere">
                           <Button
                             variant="primary"
                             className="collegeReviewDetail"
@@ -193,7 +182,7 @@ const PracTeacherFeedback = (props) => {
                               setModalShow(true);
                             }}
                           >
-                            Launch vertically centered modal
+                            showComplain
                           </Button>
 
                           <MyVerticallyCenteredModalFeedback
@@ -208,6 +197,7 @@ const PracTeacherFeedback = (props) => {
           </table>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

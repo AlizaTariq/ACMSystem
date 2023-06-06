@@ -8,6 +8,8 @@ import Pagination from "./Pagination";
 import * as XLSX from "xlsx";
 import Login from "./Login";
 import NavBar from "./NavBar";
+import Footer from "./Footer";
+
 export default function OtherDuties() {
   const navigate = useNavigate();
   const [duties, setDuties] = useState([]);
@@ -48,7 +50,7 @@ export default function OtherDuties() {
   }
   return (
     <>
-     <NavBar/>
+      <NavBar />
       <div className="container">
         <div className="d-flex flex-row-reverse bd-highlight">
           <p className="form-inline">
@@ -63,17 +65,6 @@ export default function OtherDuties() {
             <Button className="m-2" variant="dark" onClick={CreateDuty}>
               Create Duties
             </Button>
-            {/* <Dropdown>
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
-                Duties
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item href={navigate('/OtherDuties', { state: {data:{'status': 1}}})}>Pending</Dropdown.Item>
-                <Dropdown.Item href={navigate('/OtherDuties', { state: {data:{'status': 2}}})}>Accepted</Dropdown.Item>
-                <Dropdown.Item href={navigate('/OtherDuties', { state: {data:{'status': 3}}})}>Rejected</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown> */}
           </p>
         </div>
         <div className="d-flex flex-row bd-highlight">
@@ -111,17 +102,6 @@ export default function OtherDuties() {
                         //returns filtered array
                         return item;
                       }
-                      //   else if (item[4].includes(parseInt(values))) {
-                      //     //returns filtered array
-                      //     return item;
-                      //   }
-                      //else if (item[3].includes(values)) {
-                      //   //returns filtered array
-                      //   return item;
-                      // }else if (item[1].toLowerCase().includes(values.toLowerCase())) {
-                      //   //returns filtered array
-                      //   return item;
-                      // }
                     })
                     .map((item) => (
                       <tr
@@ -198,6 +178,7 @@ export default function OtherDuties() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

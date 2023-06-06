@@ -9,11 +9,9 @@ import ShowDuties from "./Components/pages/ShowDuties";
 import { redirect, useHistory } from "react-router-dom";
 //import MyForm from './Components/MyForm';
 import CollegeReview from "./Components/pages/CollegeReview";
-import SearchBar from "./Components/pages/SearchBar";
 import GenerateDuties from "./Components/pages/GenerateDuties";
 import PracCollegeReview from "./Components/pages/PracCollegeReview";
 import PracTeacherFeedback from "./Components/pages/PracTeacherFeedback";
-
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import TeacherReview from "./Components/pages/TeacherReview";
 import { BrowserRouter } from "react-router-dom";
@@ -23,7 +21,7 @@ import SideBar from "./Components/pages/SideBar";
 import NavBar from "./Components/pages/NavBar";
 import Exam_Schedule from "./Components/pages/Exam_Schedule";
 import CreateAndSendDuty from "./Components/pages/CreateAndSendDuty";
-//import SideBarEx from "./Components/pages/SideBarEx";
+
 import FORMPDF from "./Components/pages/FORMPDF";
 // import Schedule from "./Components/pages/Schedule"
 import ShowDutiesEx from "./Components/pages/ShowDutiesEx";
@@ -31,7 +29,7 @@ import AllDuties from "./Components/pages/AllDuties";
 import DutyDetailsEx from "./Components/pages/DutyDetailsEx";
 import TableOfCariculum from "./Components/pages/TableOfCariculum";
 import CourseCard from "./Components/pages/CourseCard";
-import LoginPage from "./Components/pages/LoginPage";
+import Footer from "./Components/pages/Footer";
 
 const About = () => {
   return (
@@ -99,8 +97,8 @@ function App() {
           <Route path="/TeacherReview" element={<TeacherReview />} />
           <Route path="/data" element={<Form />} />
           <Route path="/showduties" element={<ShowDuties />} />
-          <Route path="/searchBar" element={<SearchBar />} />
           <Route path="/GenerateDuties" element={<GenerateDuties />} />
+          <Route path="/Footer" element={<Footer />} />
           <Route
             path="/PracTeacherFeedback"
             element={<PracTeacherFeedback />}

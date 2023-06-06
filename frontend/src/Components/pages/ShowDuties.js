@@ -11,6 +11,8 @@ import ShowDutyDetail from "./ShowDutyDetail";
 import ShowDutiesPracT from "./ShowDutiesPracT";
 import Login from "./Login";
 import NavBar from "./NavBar";
+import Footer from "./Footer";
+
 const ShowDuties = () => {
   const [list1, setList1] = useState([]);
   const [counter, setCounter] = useState(1);
@@ -202,6 +204,7 @@ const ShowDuties = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

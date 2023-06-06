@@ -198,50 +198,53 @@ def getCrsInfo():
 
 #Send Mail To the practical duty Examiner
 def sendMailPracDuty(mydata):
-    examinerlist=mydata['examiner']
-    college=mydata['college']
-    dept=mydata['deptValue']
-    courseInfo=mydata['courseValue']
-    html_content = f"""\
-            <html>
-            <body>
-               <body>
-                    <p>Hi <b>{examinerlist[1]}</b>,<br><br>
-                    Congratulations you are selected for the Practical Duty. Details are given below
-                    <br><b>Course</b> : {courseInfo}
-                    <br><b>College</b> : {college}
-                    <br><b>Department</b> : {dept}<br>
-                   
-                    Thanks,<br><br>
-                    Show Your willingness by replying.<br><br>
-                    <a href="https://www.w3schools.com/">
-                        <button style="background-color: green; color: white; padding: 10px 20px;">Accepted!</button>
-                    </a>
-                      <a href="https://www.w3schools.com/">
-                        <button style="background-color: red; color: white; padding: 10px 20px;">Rejected!</button>
-                    </a>
-                    </p>
-                </body>
-            </html>
-        """
+    try:
+        examinerlist=mydata['examiner']
+        college=mydata['college']
+        dept=mydata['deptValue']
+        courseInfo=mydata['courseValue']
+        html_content = f"""\
+                <html>
+                <body>
+                <body>
+                        <p>Hi <b>{examinerlist[1]}</b>,<br><br>
+                        Congratulations you are selected for the Practical Duty. Details are given below
+                        <br><b>Course</b> : {courseInfo}
+                        <br><b>College</b> : {college}
+                        <br><b>Department</b> : {dept}<br>
+                    
+                        Thanks,<br><br>
+                        Show Your willingness by replying.<br><br>
+                        <a href="https://www.w3schools.com/">
+                            <button style="background-color: green; color: white; padding: 10px 20px;">Accepted!</button>
+                        </a>
+                        <a href="https://www.w3schools.com/">
+                            <button style="background-color: red; color: white; padding: 10px 20px;">Rejected!</button>
+                        </a>
+                        </p>
+                    </body>
+                </html>
+            """
 
-    # Create the email message
-    message = MIMEMultipart("alternative")
-    message["Subject"] = "Practical Duty Assignment."
-    message["From"] = "acms.duty@gmail.com"  # Replace with your email address
-    message["To"] = examinerlist[2]  # Replace with the recipient's email address
+        # Create the email message
+        message = MIMEMultipart("alternative")
+        message["Subject"] = "Practical Duty Assignment."
+        message["From"] = "acms.duty@gmail.com"  # Replace with your email address
+        message["To"] = examinerlist[2]  # Replace with the recipient's email address
 
-    # Attach the HTML content to the message
-    html_part = MIMEText(html_content, "html")
-    message.attach(html_part)
+        # Attach the HTML content to the message
+        html_part = MIMEText(html_content, "html")
+        message.attach(html_part)
 
-    # Send the email using Gmail SMTP
-    with smtplib.SMTP("smtp.gmail.com", 587) as server:
-        server.starttls()
-        server.login("acms.duty@gmail.com", "lenwtfhxccnpghlt")  # Replace with your Gmail credentials
-        server.sendmail(message["From"], message["To"], message.as_string())
+        # Send the email using Gmail SMTP
+        with smtplib.SMTP("smtp.gmail.com", 587) as server:
+            server.starttls()
+            server.login("acms.duty@gmail.com", "lenwtfhxccnpghlt")  # Replace with your Gmail credentials
+            server.sendmail(message["From"], message["To"], message.as_string())
 
-    print("Email sent successfully.")
+        print("Email sent successfully.")
+    except Exception as e :
+        print("Mail cannot be send ",str(e))
 
 
 #Send Practical Duty To The Examiner
@@ -448,9 +451,10 @@ def getDutyDetail():
     print("DataID: ",data)
     List = dbModel.getDuty(data['Id'])
     print("List: ",List)
-    dutyDetail = dbModel.fetchDutyDetail(List)
-    if dutyDetail != None:
-        return jsonify(dutyDetail)
+    if List != None:
+        dutyDetail = dbModel.fetchDutyDetail(List)
+        if dutyDetail != None:
+            return jsonify(dutyDetail)
     return "'key': 'empty'" 
 
 @app.route('/getNotAssignedDuties' ,methods = ["GET"])

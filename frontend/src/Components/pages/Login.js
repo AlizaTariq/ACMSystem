@@ -5,11 +5,8 @@ import "../css/Login.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faLock } from "@fortawesome/fontawesome-free";
 import profilepic from "../images/avatar.svg";
-import AnimatedSVG from "./AnimatedSVG";
 import svgimg from "../images/sidepanel.png";
 import accessDenied from "../images/access-denied.png";
-// import { useSpring, animated } from "react-spring";
-//import { ReactComponent as AnimatedSVG } from "../images/loginSVGImage.svg";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -17,6 +14,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import backgroundVideo from "../video/pixel.mp4";
+import svgimgOne from "../images/admin.png";
+import svgimgTwo from "../images/profile.png";
+import svgimgThree from "../images/assign.png";
+import svgimgFour from "../images/software-engineer.png";
+
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -66,30 +68,6 @@ export default function Login() {
       })
       .catch((error) => console.error("Error:", error));
   };
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-
-  //   fetch("http://localhost:3000/loginData", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ username, password }),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       if (data.success) {
-  //         setLoggedIn(true);
-  //       }
-  //       const { success } = data;
-  //       setDutyStatus(
-  //         success ? "Duties generated successfully." : "Duties not generated."
-  //       );
-  //       setOpen(true);
-  //     })
-  //     .catch((error) => console.error("Error:", error));
-  // };
 
   if (loggedIn) {
     console.log("Login state true ===> ", loggedIn);
@@ -174,8 +152,25 @@ export default function Login() {
             </form>
           </div>
           <div className="childT">
-            <img id="immg" src={svgimg}></img>
+            {/* <img id="immg" src={svgimg}></img> */}
+            <div style={{ display: "flex" }}>
+              <div id="d1" style={{ flex: 1 }}>
+                <img id="img1" src={svgimgOne}></img>{" "}
+              </div>
+              <div id="d2" style={{ flex: 1 }}>
+                <img id="img2" src={svgimgTwo}></img>{" "}
+              </div>
+            </div>
+            <div style={{ display: "flex" }}>
+              <div id="d3" style={{ flex: 1 }}>
+                <img id="img3" src={svgimgThree}></img>{" "}
+              </div>
+              <div id="d4" style={{ flex: 1 }}>
+                <img id="img4" src={svgimgFour}></img>{" "}
+              </div>
+            </div>
           </div>
+
           <Dialog open={open} className="custom-dialog" onClose={handleClose}>
             <div className="forcenterOne">
               <img className="forcenter pic" src={accessDenied} alt="avatar" />
@@ -196,7 +191,6 @@ export default function Login() {
           </Dialog>
         </div>
       </div>
-      {/* </div> */}
     </>
   );
 }

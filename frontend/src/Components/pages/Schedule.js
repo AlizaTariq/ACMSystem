@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import username from "../images/profilepic-2.jpg";
-
+import Footer from "./Footer";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../css/scheduler.css";
@@ -127,13 +127,6 @@ const Schedule = () => {
 
   return (
     <>
-      {/* {listd1}
-    {console.log(listd1)}
-    <select>
-             {listd1.map((num, index) => {
-               return <option key={index} value={num}>{num}</option>
-             })}
-    </select> */}
       <NavBar />
       <div className="SchedulePage">
         <br />
@@ -253,6 +246,7 @@ const Schedule = () => {
           <br />
         </Container>
       </div>
+      <Footer />
     </>
   );
 };

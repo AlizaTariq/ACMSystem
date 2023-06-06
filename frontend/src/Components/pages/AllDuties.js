@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import Footer from "./Footer";
 import { useNavigate, createSearchParams } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
@@ -200,6 +200,7 @@ export default function AllDuties() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

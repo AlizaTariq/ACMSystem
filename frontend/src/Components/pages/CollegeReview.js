@@ -6,10 +6,8 @@ import ModalHeader from "react-bootstrap/ModalHeader";
 import ModalFooter from "react-bootstrap/ModalFooter";
 import ModalTitle from "react-bootstrap/ModalTitle";
 import Login from "./Login";
-
+import Footer from "./Footer";
 import { title, setTitle } from "react";
-//import './SendingRequest.css'
-
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Container from "react-bootstrap/Container";
@@ -18,6 +16,8 @@ import Col from "react-bootstrap/Col";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+
+import "../css/CollegeReviewFeedback.css";
 
 import react from "react";
 import { FaStar } from "react-icons/fa";
@@ -82,8 +82,13 @@ const CollegeReview = () => {
 
   return (
     <>
-       <NavBar></NavBar>    
-      <button onClick={showModal}>Display Modal</button>
+      <NavBar></NavBar>
+      <div className="trmodal">
+        <button className="modalbtnhere" onClick={showModal}>
+          Display College Review Modal
+        </button>
+      </div>
+
       <Modal
         show={isOpen}
         onHide={hideModal}
@@ -190,6 +195,7 @@ const CollegeReview = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+      <Footer />
     </>
   );
 };

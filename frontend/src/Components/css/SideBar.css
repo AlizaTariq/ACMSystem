@@ -14,7 +14,8 @@ body {
 }
 
 .side-nav-container {
-  background-color: var(--dark);
+  /* background-color: var(--dark); */
+  background-color: #061b28;
   width: 300px;
   height: 160vh;
   position: relative;

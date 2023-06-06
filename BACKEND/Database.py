@@ -837,7 +837,7 @@ class DatabaseModel:
                 query="select e.examiner_id,e.user_id,u.usr_name,"\
                 "u.usr_profile_pic,e.institution,e.availability,e.ranking,e.resume "\
                 "from examiner e, users u where e.user_id=u.usr_id order by ranking "\
-                "desc LIMIT 50"
+                "desc LIMIT 15"
                 cursor.execute(query)
                 rankList=cursor.fetchall()
                
@@ -1011,7 +1011,7 @@ class DatabaseModel:
     def findCrsDetail(self,id):
         try:
             if self.connection!=None:
-                self.cursor=self.connection.cursor()
+                cursor=self.connection.cursor()
                 query ="Select * from roadmap where rd_id = %s;"
                 arg =(id,)
                 self.cursor.execute(query,arg)
@@ -1020,8 +1020,8 @@ class DatabaseModel:
         except Exception as e:
                 print("Exception in getting findCrsDetail",str(e))
         finally:
-                if self.cursor!=None:
-                    self.cursor.close()
+                if cursor!=None:
+                    cursor.close()
 
     def CreateDuty(self,List):
         try:
@@ -1135,6 +1135,7 @@ class DatabaseModel:
         # print("In getFollowedRoadMapByCurrentBatches")
         #2020
         CurrentFollowedRoadMapYear = self.GetCurrentFollowedRoadMapYear()
+        print("CurrerntYear =",CurrentFollowedRoadMapYear)
         #(6,4,2)
         CurrentSemester = self.getSemester()
         #(cs,it)
@@ -1412,8 +1413,9 @@ class DatabaseModel:
     def fetchDutyDetail(self, List):
         #List = [examinerId,Name,dept,roadmapyr,rd_id,courseName]
         DataList = []
-        examiner = self.ExaminerDetailForDuty(List[0])
-        courseDetail= self.findCrsDetail(List[1])
+        if(List):
+            examiner = self.ExaminerDetailForDuty(List[0])
+            courseDetail= self.findCrsDetail(List[1])
         for item in examiner:
              DataList.append(item)
         DataList.append(courseDetail[1].upper() +"-"+ str(courseDetail[2])) # dept-semester

@@ -43,30 +43,38 @@ function NavBar() {
             <Nav.Link href="/home">Home</Nav.Link>
             <Nav.Link href="/loginData">Login</Nav.Link>
 
-            <NavDropdown title="Duties" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="/showduties">
+            <NavDropdown
+              title="Duties"
+              className="dropdownOne"
+              id="navbarScrollingDropdown"
+            >
+              <NavDropdown.Item href="/showduties" className="itemhere">
                 Practical Duties
               </NavDropdown.Item>
 
-              <NavDropdown.Item href="/sendRequest">
+              <NavDropdown.Item href="/sendRequest" className="itemhere">
                 Assign Practical Duties
               </NavDropdown.Item>
 
               <NavDropdown.Divider />
 
-              <NavDropdown.Item href="/ShowDutiesEx">
+              <NavDropdown.Item href="/ShowDutiesEx" className="itemhere">
                 Examiner Duties
               </NavDropdown.Item>
             </NavDropdown>
 
             <Nav.Link href="/notifications">Notifications</Nav.Link>
             <Nav.Link href="/TableOfCariculum">Curriculum</Nav.Link>
-            <NavDropdown title="Others" id="navbarScrollingDropdown2">
-              <NavDropdown.Item href="/TeacherReview">
+            <NavDropdown
+              title="Others"
+              className="dropdownOne"
+              id="navbarScrollingDropdown2"
+            >
+              <NavDropdown.Item href="/TeacherReview" className="itemhere">
                 Teacher Review
               </NavDropdown.Item>
 
-              <NavDropdown.Item href="/CollegeReview">
+              <NavDropdown.Item href="/CollegeReview" className="itemhere">
                 College Review
               </NavDropdown.Item>
             </NavDropdown>

@@ -4,9 +4,9 @@
   background-color: #061b28;
   font-weight: 100px;
 }
-.navbar-light .navbar-nav .nav-link
-{
-  color:  #ffdb58  !important
+.navbar-light .navbar-nav .nav-link {
+  /* color:  #ffdb58  !important */
+  color: #fff;
 }
 .navbar-white-text .nav-link,
 .navbar-white-text .navbar-brand {
@@ -51,7 +51,21 @@
   background-color: rgb(4, 105, 105);
 }
 
-.logoutDiv
-{
-  float:right;
+.logoutDiv {
+  float: right;
+}
+.dropdownOne .dropdown-menu {
+  background-color: #061b28;
+  color: #fff !important;
+}
+.dropdownOne .dropdown-menu:hover {
+  background-color: #0d3650;
+  color: #fff !important;
+}
+
+.dropdownOne .dropdown-menu .itemhere {
+  color: #fff;
+}
+.dropdownOne .dropdown-menu .itemhere:hover {
+  color: black;
 }

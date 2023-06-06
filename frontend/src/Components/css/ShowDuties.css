@@ -32,11 +32,32 @@
   margin: 3px;
   font-size: 16px;
 }
-
+#acceptBtn:hover {
+  position: relative;
+  float: right;
+  background-color: rgb(100, 145, 33);
+  color: #fff;
+  border-radius: 7px;
+  padding: 7px;
+  font-weight: bold;
+  margin: 3px;
+  font-size: 16px;
+}
 #notAssignedBtn {
   position: relative;
   float: right;
   background-color: rgb(110, 107, 107);
+  color: #fff;
+  border-radius: 7px;
+  padding: 7px;
+  font-weight: bold;
+  margin: 3px;
+  font-size: 16px;
+}
+#notAssignedBtn:hover {
+  position: relative;
+  float: right;
+  background-color: rgb(71, 70, 70);
   color: #fff;
   border-radius: 7px;
   padding: 7px;
@@ -56,6 +77,17 @@
   margin: 3px;
   font-size: 16px;
 }
+#showAllBtn:hover {
+  position: relative;
+  float: right;
+  background-color: rgb(43, 5, 133);
+  color: #fff;
+  border-radius: 7px;
+  padding: 7px;
+  font-weight: bold;
+  margin: 3px;
+  font-size: 16px;
+}
 
 #pendingBtn {
   position: relative;
@@ -68,10 +100,10 @@
   margin: 3px;
   font-size: 16px;
 }
-#rejectBtn {
+#pendingBtn:hover {
   position: relative;
   float: right;
-  background-color: #a30000;
+  background-color: #c48303;
   color: #fff;
   border-radius: 7px;
   padding: 7px;
@@ -79,17 +111,7 @@
   margin: 3px;
   font-size: 16px;
 }
-#acceptBtn:hover {
-  position: relative;
-  float: right;
-  background-color: rgb(140, 203, 45);
-  color: #fff;
-  border-radius: 7px;
-  padding: 7px;
-  font-weight: bold;
-  margin: 3px;
-  font-size: 17px;
-}
+
 .showDutyTableBtn {
   position: relative;
   float: left;
@@ -102,39 +124,28 @@
   margin-top: 10px;
   font-size: 17px;
 }
-#notAssignedBtn:hover {
+.showDutyTableBtn:hover {
   position: relative;
-  float: right;
-  background-color: rgb(110, 107, 107);
+  float: left;
+  background-color: rgb(14, 104, 62);
   color: #fff;
   border-radius: 7px;
   padding: 7px;
   font-weight: bold;
   margin: 3px;
+  margin-top: 10px;
   font-size: 17px;
 }
-#showAllBtn:hover {
+#rejectBtn {
   position: relative;
   float: right;
-  background-color: rgb(55, 7, 167);
+  background-color: #ce0202;
   color: #fff;
   border-radius: 7px;
   padding: 7px;
   font-weight: bold;
   margin: 3px;
-  font-size: 17px;
-}
-
-#pendingBtn:hover {
-  position: relative;
-  float: right;
-  background-color: #f9a703;
-  color: #fff;
-  border-radius: 7px;
-  padding: 7px;
-  font-weight: bold;
-  margin: 3px;
-  font-size: 17px;
+  font-size: 16px;
 }
 #rejectBtn:hover {
   position: relative;
@@ -145,7 +156,7 @@
   padding: 7px;
   font-weight: bold;
   margin: 3px;
-  font-size: 17px;
+  font-size: 16px;
 }
 
 .showDutyMainMainDiv {

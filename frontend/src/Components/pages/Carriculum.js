@@ -5,7 +5,7 @@ import axios from "axios";
 import * as XLSX from "xlsx";
 import Login from "./Login";
 import NavBar from "./NavBar";
-
+import Footer from "./Footer";
 export default function Carriculum() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [data, setdata] = useState({});
@@ -94,24 +94,7 @@ export default function Carriculum() {
           </button>
         </div>
       </nav>
-      {/* <!-- Modal --> */}
-
-      {/* <table className="container">
-        <thead>
-          <tr>
-            <th scope="col">x</th>
-            <th scope="col">PhoneNo</th>
-          </tr>
-        </thead>
-        <tbody>
-         {items.map((d) => (
-            <tr key={{d[0].data}}>
-              <td>{d[1].x}</td>
-              <td>{d[2].PhoneNo}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table> */}
+      <Footer />
     </>
   );
 }

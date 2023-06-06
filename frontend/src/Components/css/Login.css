@@ -109,3 +109,42 @@
   color: #fff;
   border-radius: 10px;
 }
+
+/* images */
+#img1 {
+  width: 80%;
+  height: 80%;
+}
+#img2 {
+  width: 85%;
+  height: 85%;
+  padding-left: 35px;
+}
+#img3 {
+  width: 75%;
+  height: 80%;
+  padding-top: 20px;
+}
+#img4 {
+  width: 85%;
+  height: 90%;
+  padding-left: 50px;
+  padding-top: 30px;
+}
+/* divs */
+#d1 {
+  border-bottom: 2px solid white;
+  border-right: 2px solid white;
+}
+#d2 {
+  border-bottom: 2px solid white;
+  border-left: 2px solid white;
+}
+#d3 {
+  border-top: 2px solid white;
+  border-right: 2px solid white;
+}
+#d4 {
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+}

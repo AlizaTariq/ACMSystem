@@ -13,7 +13,7 @@ import NavBar from "./NavBar";
 import { useState, useEffect } from "react";
 import SendExamDuty from "./SendExamDuty";
 import axios from "axios";
-
+import Footer from "./Footer";
 const Exam_Schedule = () => {
   const navigate = useNavigate();
   const [textValue, setTextValue] = useState("");
@@ -330,6 +330,7 @@ const Exam_Schedule = () => {
           <br />
         </Container>
       </div>
+      <Footer />
     </>
   );
 };

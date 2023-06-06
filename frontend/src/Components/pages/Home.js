@@ -1,5 +1,5 @@
 import SideBar from "./SideBar";
-
+import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
 import GenerateDuties from "./GenerateDuties";
@@ -115,12 +115,16 @@ const UserData = () => {
                   <i className="fas fa-users"></i>
                 </div>
                 <div className="mb-4" style={{ float: "left" }}>
-                  <h5 className="card-title mb-0">
-                    Total Practical Duties : {countDetail[0]}
+                  <div className="card-title mb-0">
+                    <p className="phere">
+                      Total Practical Duties : {countDetail[0]}
+                    </p>
+
+                    <p className="phere">
+                      Total Exam Duties : {countDetail[5]}
+                    </p>
                     <br />
-                    Total Exam Duties : {countDetail[5]}
-                    <br />
-                  </h5>
+                  </div>
                 </div>
               </div>
             </div>
@@ -132,9 +136,13 @@ const UserData = () => {
                 </div>
                 <div className="mb-4" style={{ float: "left" }}>
                   <div className="card-title mb-0">
-                    <p>Total College Count : {countDetail[7]}</p>
-                    <br />
-                    <p>Total Departments Count : {countDetail[8]}</p>
+                    <p className="phere">
+                      Total College Count : {countDetail[7]}
+                    </p>
+
+                    <p className="phere">
+                      Total Departments Count : {countDetail[8]}
+                    </p>
                     <br />
                   </div>
                 </div>
@@ -147,7 +155,7 @@ const UserData = () => {
                 id="genDutyBtn"
                 onClick={handleButtonClick}
               >
-                Generate Duties
+                <b>Generate Duties</b>
               </Button>
               <div className="card-statistic-3 p-3">
                 <div className="card-icon card-icon-large">
@@ -172,21 +180,6 @@ const UserData = () => {
                             alt="generateDuties-pic"
                           />
                         </div>
-
-                        {/* extra content added 196 - 208 otherwise comment it and use 191 - 193 instead */}
-                        {/* <DialogContent>
-          {
-            dutyStatus ? (
-              <div className="forcenterOne">
-              <img className="forcenter pic" src={deleteHere} alt="delete" />
-            </div>
-            ) : (
-              <div className="forcenterOne">
-              <img className="forcenter pic" src={checkedHere} alt="checked" />
-            </div>
-            )
-          }
-      </DialogContent> */}
 
                         <DialogTitle className="dialogTitle">
                           <b>
@@ -218,7 +211,9 @@ const UserData = () => {
               style={{ height: "380px", margin: "14px" }}
             >
               <div className="card-statistic-3 p-3">
-                <h1>Affiliated Colleges</h1>
+                <h1>
+                  <b>Affiliated Colleges</b>
+                </h1>
                 <table className="table">
                   <thead>
                     <tr style={{ color: "white" }}>
@@ -251,12 +246,14 @@ const UserData = () => {
               style={{ height: "380px", margin: "14px " }}
             >
               <div className="card-statistic-3 p-3">
-                <h1>Top 50 Ranked Examiner</h1>
+                <h1>
+                  <b>Top 15 Ranked Examiner</b>
+                </h1>
                 <table className="table">
                   <thead>
                     <tr style={{ color: "white" }}>
-                      <td>Profile Picture</td>
-                      <td>Examiner Name</td>
+                      <td className="texthere"></td>
+                      <td>Name</td>
                       <td>Institution</td>
                       <td>Ranking</td>
                     </tr>
@@ -292,6 +289,7 @@ const UserData = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

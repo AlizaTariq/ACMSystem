@@ -8,6 +8,7 @@ import "../css/CreateAndSendDuty.css";
 import Button from "react-bootstrap/Button";
 import Login from "./Login";
 import NavBar from "./NavBar";
+import Footer from "./Footer";
 export default function CreateAndSendDuty() {
   const navigate = useNavigate();
   const [RoadMapYear, setRoadMapYear] = useState([]);
@@ -77,164 +78,126 @@ export default function CreateAndSendDuty() {
 
   return (
     <>
-     <NavBar/>
-    <div className="container">
-      <div className="mbsc-grid mbsc-grid-fixed mt-5">
-        <div className="mbsc-form-group">
-          <div className="mbsc-row mbsc-justify-content-center">
-            <div className="mbsc-col-md-10 mbsc-col-xl-8 mbsc-form-grid">
-              <div className="myheading mbsc-form-group-title">
-                <h3>
-                  <b>Create & Send Duty</b>
-                </h3>
-              </div>
-              <div className="mbsc-row">
-                <div className="mbsc-col-md-6 mbsc-col-12">
-                  <Dropdown
-                    label="Roadmap Year"
-                    inputStyle="box"
-                    labelStyle="floating"
-                    onChange={(event) =>
-                      setSelectedRoadMapYear(event.target.value)
-                    }
-                    id="roadMapYear"
-                  >
-                    <option value>--Select Year--</option>
-                    {RoadMapYear.map((num, index) => {
-                      return (
-                        <option key={index} value={num}>
-                          {num}
-                        </option>
-                      );
-                    })}
-                  </Dropdown>
+      <NavBar />
+      <div className="container">
+        <div className="mbsc-grid mbsc-grid-fixed mt-5">
+          <div className="mbsc-form-group">
+            <div className="mbsc-row mbsc-justify-content-center">
+              <div className="mbsc-col-md-10 mbsc-col-xl-8 mbsc-form-grid">
+                <div className="myheading mbsc-form-group-title">
+                  <h3>
+                    <b>Create & Send Duty</b>
+                  </h3>
                 </div>
-                <div className="mbsc-col-md-6 mbsc-col-12">
-                  <Dropdown
-                    label="Department"
-                    inputStyle="box"
-                    labelStyle="floating"
-                    onChange={(event) => GetCourses(event.target.value)}
-                    id="department"
-                  >
-                    <option value>--Select Department--</option>
-                    {department.map((num, index) => {
-                      return (
-                        <option key={index} value={num}>
-                          {num}
-                        </option>
-                      );
-                    })}
-                  </Dropdown>
+                <div className="mbsc-row">
+                  <div className="mbsc-col-md-6 mbsc-col-12">
+                    <Dropdown
+                      label="Roadmap Year"
+                      inputStyle="box"
+                      labelStyle="floating"
+                      onChange={(event) =>
+                        setSelectedRoadMapYear(event.target.value)
+                      }
+                      id="roadMapYear"
+                    >
+                      <option value>--Select Year--</option>
+                      {RoadMapYear.map((num, index) => {
+                        return (
+                          <option key={index} value={num}>
+                            {num}
+                          </option>
+                        );
+                      })}
+                    </Dropdown>
+                  </div>
+                  <div className="mbsc-col-md-6 mbsc-col-12">
+                    <Dropdown
+                      label="Department"
+                      inputStyle="box"
+                      labelStyle="floating"
+                      onChange={(event) => GetCourses(event.target.value)}
+                      id="department"
+                    >
+                      <option value>--Select Department--</option>
+                      {department.map((num, index) => {
+                        return (
+                          <option key={index} value={num}>
+                            {num}
+                          </option>
+                        );
+                      })}
+                    </Dropdown>
+                  </div>
                 </div>
-              </div>
-              <div className="mbsc-row">
-                <div className="mbsc-col-12">
-                  <Dropdown
-                    label="Course"
-                    inputStyle="box"
-                    labelStyle="floating"
-                    value={selectedOption}
-                    onChange={(event) => handleSelectChange(event.target.value)}
-                    id="courseName"
-                    className="form-select form-select-lg mb-3"
-                    aria-label=".form-select-lg example"
-                  >
-                    <option value>--Select Course Name--</option>
-                    {AllCourses.map((num, index) => {
-                      return (
-                        <option key={index} value={num}>
-                          {num}
-                        </option>
-                      );
-                    })}
-                  </Dropdown>
+                <div className="mbsc-row">
+                  <div className="mbsc-col-12">
+                    <Dropdown
+                      label="Course"
+                      inputStyle="box"
+                      labelStyle="floating"
+                      value={selectedOption}
+                      onChange={(event) =>
+                        handleSelectChange(event.target.value)
+                      }
+                      id="courseName"
+                      className="form-select form-select-lg mb-3"
+                      aria-label=".form-select-lg example"
+                    >
+                      <option value>--Select Course Name--</option>
+                      {AllCourses.map((num, index) => {
+                        return (
+                          <option key={index} value={num}>
+                            {num}
+                          </option>
+                        );
+                      })}
+                    </Dropdown>
+                  </div>
                 </div>
-              </div>
-              <div className="mbsc-row">
-                <div className="mbsc-col-12">
-                  <Dropdown
-                    label="Examiner"
-                    inputStyle="box"
-                    labelStyle="floating"
-                    onChange={(event) => setExaminerName(event.target.value)}
-                    id="examinerid"
-                  >
-                    <option value>--Select Examiner--</option>
-                    {SelectedExamId.map((num, index) => {
-                      return (
-                        <option key={index} value={num}>
-                          {num}
-                        </option>
-                      );
-                    })}
-                  </Dropdown>
+                <div className="mbsc-row">
+                  <div className="mbsc-col-12">
+                    <Dropdown
+                      label="Examiner"
+                      inputStyle="box"
+                      labelStyle="floating"
+                      onChange={(event) => setExaminerName(event.target.value)}
+                      id="examinerid"
+                    >
+                      <option value>--Select Examiner--</option>
+                      {SelectedExamId.map((num, index) => {
+                        return (
+                          <option key={index} value={num}>
+                            {num}
+                          </option>
+                        );
+                      })}
+                    </Dropdown>
+                  </div>
                 </div>
-              </div>
-              {/* <div className="mbsc-col-24" style={{ display: "flex", justifyContent: "Right", alignItems: "Center" }} > */}
-              <div className="lead d-flex justify-content-between">
-                <Button
-                  className="sendDuty1"
-                  onClick={() => {
-                    navigate("/ShowDutiesEx");
-                  }}
-                >
-                  Back
-                </Button>
-                <Button
-                  className="sendDuty2"
-                  style={{ borderRadius: "6px" }}
-                  onClick={uploaduty}
-                >
-                  <b>Save & Next →</b>{" "}
-                </Button>
+                {/* <div className="mbsc-col-24" style={{ display: "flex", justifyContent: "Right", alignItems: "Center" }} > */}
+                <div className="lead d-flex justify-content-between">
+                  <Button
+                    className="sendDuty1"
+                    onClick={() => {
+                      navigate("/ShowDutiesEx");
+                    }}
+                  >
+                    Back
+                  </Button>
+                  <Button
+                    className="sendDuty2"
+                    style={{ borderRadius: "6px" }}
+                    onClick={uploaduty}
+                  >
+                    <b>Save & Next →</b>{" "}
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <Footer />
     </>
   );
 }
-// useEffect(() => {
-//     fetch("http://localhost:3000/getRoadMapId")
-//       .then((response) => response.json())
-//       .then((data) => setRoadMapId(data))
-//       .then((data1) => console.log("RoadMap Id", data1))
-//       .catch((err) => console.log(err));
-//     });
-// useEffect(() => {
-//         fetch("http://127.0.0.1:5000/getRoadMapYear")
-//           .then((response) => response.json())
-//           .then((data) => setRoadMapYear(data))
-//           .then((data1) => console.log("RoadMap Year", data1))
-//           .catch((err) => console.log(err));
-//         });
-// useEffect(() => {
-//     fetch("http://127.0.0.1:5000/getDepartments")
-//         .then((response) => response.json())
-//         .then((data) => setDepartment(data))
-//         .then((data1) => console.log("Departments", data1))
-//         .catch((err) => console.log(err));
-// });
-// useEffect(() => {
-//     fetch("http://127.0.0.1:5000/getCourseName")
-//         .then((response) => response.json())
-//         .then((data) => setCourseCode(data))
-//         .then((data1) => console.log("Course Code", data1))
-//         .catch((err) => console.log(err));
-// });
-// {
-  /* <label>Roadmap ID: </label>
-                                <br/> */
-// }
-// {
-  /* <select onChange={(event) => setSelectedRoadMapid(event.target.value)} id="roadMapid" className="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                                    <option selected>Current Road Map</option>
-                                    {RoadMapid.map((num, index) => {
-                                        return <option key={index} value={num}>{num} </option>
-                                    })}
-                                    </select>
-                                <br/> */
-// }

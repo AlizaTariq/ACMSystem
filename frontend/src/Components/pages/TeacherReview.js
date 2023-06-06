@@ -5,7 +5,7 @@ import ModalBody from "react-bootstrap/ModalBody";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import ModalFooter from "react-bootstrap/ModalFooter";
 import ModalTitle from "react-bootstrap/ModalTitle";
-
+import "../css/TeacherFeedback.css";
 import { title, setTitle } from "react";
 //import "./SendingRequest.css";
 
@@ -80,8 +80,13 @@ const TeacherReview = () => {
 
   return (
     <>
-       <NavBar/>    
-      <button onClick={showModal}>Display Modal</button>
+      <NavBar />
+      <div className="trmodal">
+        <button className="modalbtnhere" onClick={showModal}>
+          Display Teacher Review
+        </button>
+      </div>
+
       <Modal
         show={isOpen}
         onHide={hideModal}

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import ShowDutiesEx from "./ShowDutiesEx";
-
+import Footer from "./Footer";
 import userpic from "../images/avatar.svg";
 import Login from "./Login";
 import NavBar from "./NavBar";
@@ -44,7 +44,7 @@ export default function DutyDetailsEx() {
 
   return (
     <>
-     <NavBar/>
+      <NavBar />
       {console.log("duties ==> ", duty)}
       <div className="ntfPage">{duty.map((item) => console.log(item))}</div>
       <div className="showDutyDetailPrac">
@@ -151,6 +151,7 @@ export default function DutyDetailsEx() {
           </button>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

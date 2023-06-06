@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 import { useNavigate, useSearchParams } from "react-router-dom";
-// import { saveAs } from 'file-saver';
-// import { PDFDownloadLink} from '@react-pdf/renderer';
-// import { set } from 'react-hook-form';
-// // npm install react-pdf-table
 import Login from "./Login";
 
 import {
