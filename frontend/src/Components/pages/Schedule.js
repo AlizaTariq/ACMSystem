@@ -5,7 +5,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import username from "../images/profilepic-2.jpg";
-import Footer from "./Footer";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../css/scheduler.css";
@@ -246,7 +245,6 @@ const Schedule = () => {
           <br />
         </Container>
       </div>
-      <Footer />
     </>
   );
 };

@@ -68,7 +68,7 @@
   object-fit: cover;
 } */
 
-.video-background {
+/* .video-background {
   position: fixed;
 
   top: 0;
@@ -76,7 +76,7 @@
   width: 100%;
   height: 100%;
   z-index: -1;
-}
+} */
 
 .forcenterOne {
   align-items: center;

@@ -29,7 +29,6 @@ import AllDuties from "./Components/pages/AllDuties";
 import DutyDetailsEx from "./Components/pages/DutyDetailsEx";
 import TableOfCariculum from "./Components/pages/TableOfCariculum";
 import CourseCard from "./Components/pages/CourseCard";
-import Footer from "./Components/pages/Footer";
 
 const About = () => {
   return (
@@ -98,7 +97,6 @@ function App() {
           <Route path="/data" element={<Form />} />
           <Route path="/showduties" element={<ShowDuties />} />
           <Route path="/GenerateDuties" element={<GenerateDuties />} />
-          <Route path="/Footer" element={<Footer />} />
           <Route
             path="/PracTeacherFeedback"
             element={<PracTeacherFeedback />}

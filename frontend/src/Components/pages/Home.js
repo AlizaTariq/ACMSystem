@@ -1,5 +1,4 @@
 import SideBar from "./SideBar";
-import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
 import GenerateDuties from "./GenerateDuties";
@@ -289,7 +288,6 @@ const UserData = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

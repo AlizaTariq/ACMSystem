@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Footer from "./Footer";
 class ReactForm1 extends Component {
   constructor(props) {
     super(props);

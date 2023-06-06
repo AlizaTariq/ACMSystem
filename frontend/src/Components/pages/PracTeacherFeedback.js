@@ -15,7 +15,6 @@ import Schedule from "./Schedule";
 import NavBar from "./NavBar";
 import "../css/PracTeacherFeedback.css";
 import Modal from "react-bootstrap/Modal";
-import Footer from "./Footer";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
@@ -57,22 +56,22 @@ const PracTeacherFeedback = (props) => {
   function MyVerticallyCenteredModalFeedback(props) {
     return (
       <Modal
+        class="bodyModal"
         {...props}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
-        className="modalBody"
       >
-        <Modal.Header closeButton className="bodyModal">
+        <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
             <b>Complain</b>
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body className="bodyModal">
+        <Modal.Body>
           <h1>{currentRowFd[6]}</h1>
           <br />
         </Modal.Body>
-        <Modal.Footer className="bodyModal">
+        <Modal.Footer>
           <Button className="btnModalClose" onClick={props.onHide}>
             Close
           </Button>
@@ -152,17 +151,7 @@ const PracTeacherFeedback = (props) => {
                       }
                     })
                     .map((item) => (
-                      <tr
-                        style={{ border: "1px" }}
-                        key={item[0]}
-                        id={item[0]}
-                        // onClick={() => {
-                        //   const responseData = item[0];
-                        //   navigate("/CourseCard", {
-                        //     state: { data: { responseData } },
-                        //   });
-                        // }}
-                      >
+                      <tr style={{ border: "1px" }} key={item[0]} id={item[0]}>
                         <td className="tableTexthere">{item[0]}</td>
                         <td className="tableTexthere">{item[1]}</td>
                         <td className="tableTexthere">{item[2]}</td>
@@ -182,10 +171,11 @@ const PracTeacherFeedback = (props) => {
                               setModalShow(true);
                             }}
                           >
-                            showComplain
+                            Show Complain
                           </Button>
 
                           <MyVerticallyCenteredModalFeedback
+                            className="bodyModal"
                             show={modalShow}
                             onHide={() => setModalShow(false)}
                           />
@@ -197,7 +187,6 @@ const PracTeacherFeedback = (props) => {
           </table>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

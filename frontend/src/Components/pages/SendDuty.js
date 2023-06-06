@@ -15,7 +15,6 @@ import Login from "./Login";
 import Schedule from "./Schedule";
 import NavBar from "./NavBar";
 import { useNavigate, createSearchParams } from "react-router-dom";
-import Footer from "./Footer";
 
 const SendDuty = (props) => {
   const [teacherName, setTeacherName] = useState(
@@ -304,7 +303,6 @@ const SendDuty = (props) => {
           <br />
         </Container>
       </div>
-      <Footer />
     </>
   );
 };

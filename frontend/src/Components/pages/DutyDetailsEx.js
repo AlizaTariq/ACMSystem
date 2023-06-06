@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import ShowDutiesEx from "./ShowDutiesEx";
-import Footer from "./Footer";
 import userpic from "../images/avatar.svg";
 import Login from "./Login";
 import NavBar from "./NavBar";
@@ -151,7 +150,6 @@ export default function DutyDetailsEx() {
           </button>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

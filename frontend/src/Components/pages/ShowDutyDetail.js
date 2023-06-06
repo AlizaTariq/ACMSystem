@@ -12,7 +12,6 @@ import Button from "react-bootstrap/Button";
 import ShowDuties from "./ShowDuties";
 import Login from "./Login";
 import NavBar from "./NavBar";
-import Footer from "./Footer";
 
 const ShowDutyDetail = (props) => {
   const [duty, setDuty] = useState(props.data);
@@ -167,7 +166,6 @@ const ShowDutyDetail = (props) => {
           </button>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

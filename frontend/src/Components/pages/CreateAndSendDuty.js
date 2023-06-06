@@ -8,7 +8,6 @@ import "../css/CreateAndSendDuty.css";
 import Button from "react-bootstrap/Button";
 import Login from "./Login";
 import NavBar from "./NavBar";
-import Footer from "./Footer";
 export default function CreateAndSendDuty() {
   const navigate = useNavigate();
   const [RoadMapYear, setRoadMapYear] = useState([]);
@@ -197,7 +196,6 @@ export default function CreateAndSendDuty() {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

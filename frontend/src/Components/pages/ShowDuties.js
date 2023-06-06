@@ -11,7 +11,6 @@ import ShowDutyDetail from "./ShowDutyDetail";
 import ShowDutiesPracT from "./ShowDutiesPracT";
 import Login from "./Login";
 import NavBar from "./NavBar";
-import Footer from "./Footer";
 
 const ShowDuties = () => {
   const [list1, setList1] = useState([]);
@@ -204,7 +203,6 @@ const ShowDuties = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

@@ -164,7 +164,8 @@ p {
     color:#fff;
   } */
 
-textarea {
+textarea,
+.textField {
   width: 90%;
   padding-top: 10px;
   font-size: 13px;
@@ -176,7 +177,8 @@ textarea {
   background-color: #2c3338;
   color: white;
 }
-textarea:hover {
+textarea:hover,
+.textField:hover {
   padding-top: 10px;
   font-size: 13px;
   border-radius: 3px;

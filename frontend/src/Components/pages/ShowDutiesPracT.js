@@ -8,7 +8,6 @@ import ShowDutyDetail from "./ShowDutyDetail";
 import "../css/ShowDutiesPracT.css";
 import Login from "./Login";
 import NavBar from "./NavBar";
-import Footer from "./Footer";
 
 export default function ShowDutiesPracT() {
   const navigate = useNavigate();
@@ -222,8 +221,6 @@ export default function ShowDutiesPracT() {
           </div>
         </div>
       </div>
-
-      <Footer />
     </>
   );
 }

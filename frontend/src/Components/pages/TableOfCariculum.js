@@ -7,7 +7,6 @@ import "../css/TableOfCuriculum.css";
 import * as XLSX from "xlsx";
 import Login from "./Login";
 import NavBar from "./NavBar";
-import Footer from "./Footer";
 
 export default function TableOfCariculum() {
   useEffect(() => {
@@ -263,8 +262,6 @@ export default function TableOfCariculum() {
           </div>
         </div>
       </div>
-
-      <Footer />
     </>
   );
 }

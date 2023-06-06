@@ -27,31 +27,15 @@
 .collegeReviewDetail:hover {
   background-color: rgb(4, 105, 105);
 }
-
-.bodyModal {
-  background-color: #ffff;
-}
 .bodyModal .modal-content {
   background-color: rgb(3, 0, 19);
   color: #fff;
   border-radius: 10px;
 }
-.bodymodal .modal-dialog {
-  background-color: transparent; /* Set the background color of the modal dialog to transparent */
-}
 
-.bodymodal .modal-content .modal-header {
-  background-color: #ffffff; /* Set the desired background color for the modal header */
+.bodyModal {
+  background-color: rgb(3, 0, 19);
 }
-
-.bodymodal .modal-content .modal-body {
-  background-color: #ffffff; /* Set the desired background color for the modal body */
-}
-
-.bodymodal .modal-content .modal-footer {
-  background-color: #ffffff; /* Set the desired background color for the modal footer */
-}
-
 .btnModalClose {
   background-color: teal;
 }

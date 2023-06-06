@@ -86,10 +86,10 @@ export default function Login() {
       </marquee>
 
       <div className="container containers">
-        <video className="video-background" autoPlay muted loop>
+        {/* <video className="video-background" autoPlay muted loop>
           <source src={backgroundVideo} type="video/mp4" />
           Your browser does not support the video tag.
-        </video>
+        </video> */}
         <div className="login-content">
           <div className="childO  login-content">
             <form

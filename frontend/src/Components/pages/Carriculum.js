@@ -5,7 +5,6 @@ import axios from "axios";
 import * as XLSX from "xlsx";
 import Login from "./Login";
 import NavBar from "./NavBar";
-import Footer from "./Footer";
 export default function Carriculum() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [data, setdata] = useState({});
@@ -94,7 +93,6 @@ export default function Carriculum() {
           </button>
         </div>
       </nav>
-      <Footer />
     </>
   );
 }

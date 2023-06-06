@@ -11,7 +11,6 @@ import "../css/ShowDutiesPracT.css";
 import Login from "./Login";
 import NavBar from "./NavBar";
 import Schedule from "./Schedule";
-import Footer from "./Footer";
 
 export default function ShowDutiesEx() {
   const navigate = useNavigate();
@@ -196,7 +195,6 @@ export default function ShowDutiesEx() {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

@@ -15,7 +15,6 @@ import Schedule from "./Schedule";
 import NavBar from "./NavBar";
 import "../css/PracCollegeReview.css";
 import Modal from "react-bootstrap/Modal";
-import Footer from "./Footer";
 
 const PracCollegeReview = (props) => {
   const [reviewList, setReviewList] = useState([]);
@@ -40,7 +39,6 @@ const PracCollegeReview = (props) => {
   function MyVerticallyCenteredModal(props) {
     return (
       <Modal
-        className="bodyModal"
         {...props}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
@@ -152,6 +150,7 @@ const PracCollegeReview = (props) => {
                           </Button>
 
                           <MyVerticallyCenteredModal
+                            className="bodyModal"
                             show={modalShow}
                             onHide={() => setModalShow(false)}
                           />
@@ -163,7 +162,6 @@ const PracCollegeReview = (props) => {
           </table>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

@@ -6,7 +6,6 @@ import ModalHeader from "react-bootstrap/ModalHeader";
 import ModalFooter from "react-bootstrap/ModalFooter";
 import ModalTitle from "react-bootstrap/ModalTitle";
 import Login from "./Login";
-import Footer from "./Footer";
 import { title, setTitle } from "react";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -195,7 +194,6 @@ const CollegeReview = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Footer />
     </>
   );
 };

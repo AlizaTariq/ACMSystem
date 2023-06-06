@@ -11,7 +11,6 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Login from "./Login";
 import NavBar from "./NavBar";
-import Footer from "./Footer";
 
 const Notifications = () => {
   const [ntfValue, setNtfValue] = useState("");
@@ -150,7 +149,6 @@ const Notifications = () => {
           <h1 id="emptyNtf">No Notifications!</h1>
         </center>
       )}
-      <Footer />
     </>
   );
 };

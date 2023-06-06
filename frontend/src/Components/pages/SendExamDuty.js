@@ -13,7 +13,7 @@ import Login from "./Login";
 import Exam_Schedule from "./Exam_Schedule";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import NavBar from "./NavBar";
-import Footer from "./Footer";
+
 const SendExamDuty = () => {
   const [moreInfo, setMoreInfo] = useState("");
 
@@ -191,7 +191,6 @@ const SendExamDuty = () => {
           <br />
         </Container>
       </div>
-      <Footer />
     </>
   );
 };

@@ -8,7 +8,6 @@ import Pagination from "./Pagination";
 import * as XLSX from "xlsx";
 import Login from "./Login";
 import NavBar from "./NavBar";
-import Footer from "./Footer";
 
 export default function OtherDuties() {
   const navigate = useNavigate();
@@ -178,7 +177,6 @@ export default function OtherDuties() {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

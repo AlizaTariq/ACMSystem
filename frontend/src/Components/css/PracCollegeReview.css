@@ -16,11 +16,21 @@
   border-radius: 10px;
 } */
 
+.bodyModal .modal-content {
+  background-color: rgb(3, 0, 19);
+  color: #fff;
+  border-radius: 10px;
+}
+
 .bodyModal {
   background-color: rgb(3, 0, 19);
 }
+/* 
+.bodyModal{
+  background-color: rgb(3, 0, 19);
+}
 .bodyModal .modal-dialog {
-  /* background-color: transparent; */
+ 
   background-color: rgb(3, 0, 19);
 }
 
@@ -37,7 +47,7 @@
 .bodyModal .modal-content .modal-footer {
   background-color: rgb(3, 0, 19);
   color: #fff;
-}
+} */
 
 .btnModalClose {
   background-color: teal;

@@ -5,7 +5,6 @@ import "../css/Profile.css";
 import profile from "../images/profilepic-2.jpg";
 import Login from "./Login";
 import NavBar from "./NavBar";
-import Footer from "./Footer";
 
 const Profile = () => {
   if (!localStorage.getItem("access_token")) {
@@ -102,7 +101,8 @@ const Profile = () => {
                   </div>
                   <br></br>
                   <div className="textArea">
-                    <label className="labelText">Bio </label>
+                    <label className="labelText">Bio{"  "}</label>
+                    <br />
                     <textarea
                       id="textArea"
                       name="textArea"
@@ -151,7 +151,6 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };
