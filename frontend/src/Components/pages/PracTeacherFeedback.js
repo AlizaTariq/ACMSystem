@@ -14,10 +14,16 @@ import Login from "./Login";
 import Schedule from "./Schedule";
 import NavBar from "./NavBar";
 import "../css/PracTeacherFeedback.css";
+import Modal from "react-bootstrap/Modal";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 const PracTeacherFeedback = (props) => {
   const [feedbackList, setFeedbackList] = useState([]);
   const [valuesfb, setSearchValuefb] = useState("");
+  const [modalShow, setModalShow] = React.useState(false);
+  const [currentRowFd, setCurrentRowFd] = useState([]);
 
   const accessToken = localStorage.getItem("access_token");
   useEffect(() => {
@@ -31,6 +37,59 @@ const PracTeacherFeedback = (props) => {
 
   if (!accessToken) {
     return <Login />; // Render the Login component if access token doesn't exist
+  }
+
+  const generateStarRating = (rating) => {
+    const stars = [];
+    for (let i = 0; i < rating; i++) {
+      stars.push(
+        <FontAwesomeIcon
+          key={i}
+          icon={faStar}
+          style={{ color: "yellow" }} // Apply yellow color to the star icon
+        />
+      );
+    }
+    return stars;
+  };
+
+  function MyVerticallyCenteredModalFeedback(props) {
+    return (
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Modal heading
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h4>Centered Modal</h4>
+          <h1>{currentRowFd[0]}</h1>
+          {"   "}
+
+          <h1>{currentRowFd[1]}</h1>
+          {"   "}
+
+          <h1>{currentRowFd[2]}</h1>
+          <br />
+          <h1>{currentRowFd[3]}</h1>
+          <br />
+          <h1>{currentRowFd[4]}</h1>
+          <br />
+          <h1>{currentRowFd[5]}</h1>
+          <br />
+          <h1>{currentRowFd[6]}</h1>
+          <br />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={props.onHide}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    );
   }
 
   return (
@@ -60,13 +119,13 @@ const PracTeacherFeedback = (props) => {
           <table className="table">
             <thead>
               <tr className="headingTable">
-                <td> Teacher Feedback Id</td>
-                <td>Practical Duty Id</td>
-                <td>tf ED System </td>
-                <td>tf Appartus</td>
-                <td>tf teacher attitude</td>
-                <td>tf rate duty</td>
-                <td>tf Complain</td>
+                <td>Id</td>
+                <td>Duty Id</td>
+                <td>ED System</td>
+                <td>Appartus</td>
+                <td>Teacher attitude</td>
+                <td>Rating</td>
+                <td>Complain</td>
               </tr>
             </thead>
             <tbody>
@@ -115,20 +174,32 @@ const PracTeacherFeedback = (props) => {
                         //   });
                         // }}
                       >
-                        <td className="tableText">{item[0]}</td>
-                        <td className="tableText">{item[1]}</td>
-                        <td className="tableText">{item[2]}</td>
-                        <td className="tableText">{item[3]}</td>
-                        <td className="tableText">{item[4]}</td>
-                        <td className="tableText">{item[5]}</td>
-                        <td className="tableText">{item[6]}</td>
+                        <td className="tableTexthere">{item[0]}</td>
+                        <td className="tableTexthere">{item[1]}</td>
+                        <td className="tableTexthere">{item[2]}</td>
+                        <td className="tableTexthere">{item[3]}</td>
+                        <td className="tableTexthere">{item[4]}</td>
+                        {/* <td className="tableText">{item[5]}</td> */}
+                        <td className="tableTextStars">
+                          {generateStarRating(item[5])}
+                        </td>
+                        <td className="tableTextOne">{item[6]}</td>
                         <td>
-                          <button
-                            //id={item[0]}
+                          <Button
+                            variant="primary"
                             className="collegeReviewDetail"
+                            onClick={() => {
+                              setCurrentRowFd(item);
+                              setModalShow(true);
+                            }}
                           >
-                            Show
-                          </button>
+                            Launch vertically centered modal
+                          </Button>
+
+                          <MyVerticallyCenteredModalFeedback
+                            show={modalShow}
+                            onHide={() => setModalShow(false)}
+                          />
                         </td>
                       </tr>
                     ))

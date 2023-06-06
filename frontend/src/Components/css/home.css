@@ -378,3 +378,7 @@ c
   max-width: 540px;
   max-height: 200px;
 }
+
+.card-title {
+  text-align: center;
+}

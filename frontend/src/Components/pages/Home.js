@@ -116,15 +116,9 @@ const UserData = () => {
                 </div>
                 <div className="mb-4" style={{ float: "left" }}>
                   <h5 className="card-title mb-0">
-                    Total practical duty : {countDetail[0]}
+                    Total Practical Duties : {countDetail[0]}
                     <br />
-                    Prac Not assigned : {countDetail[1]}
-                    <br />
-                    Prac Pending : {countDetail[2]}
-                    <br />
-                    Prac Accepted :{countDetail[3]}
-                    <br />
-                    Prac Rejected : {countDetail[4]}
+                    Total Exam Duties : {countDetail[5]}
                     <br />
                   </h5>
                 </div>
@@ -137,17 +131,12 @@ const UserData = () => {
                   <i className="fas fa-book-reader"></i>
                 </div>
                 <div className="mb-4" style={{ float: "left" }}>
-                  <h5 className="card-title mb-0">
-                    Total Exam Duty : {countDetail[5]}
+                  <div className="card-title mb-0">
+                    <p>Total College Count : {countDetail[7]}</p>
                     <br />
-                    Total Examiners : {countDetail[6]}
+                    <p>Total Departments Count : {countDetail[8]}</p>
                     <br />
-                    College Count : {countDetail[7]}
-                    <br />
-                    Departments Count : {countDetail[8]}
-                    <br />
-                  </h5>
-                  <h1>1236</h1>
+                  </div>
                 </div>
               </div>
             </div>

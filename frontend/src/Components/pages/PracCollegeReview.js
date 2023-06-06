@@ -14,10 +14,13 @@ import Login from "./Login";
 import Schedule from "./Schedule";
 import NavBar from "./NavBar";
 import "../css/PracCollegeReview.css";
+import Modal from "react-bootstrap/Modal";
 
 const PracCollegeReview = (props) => {
   const [reviewList, setReviewList] = useState([]);
   const [values, setSearchValue] = useState("");
+  const [modalShow, setModalShow] = React.useState(false);
+  const [currentRow, setCurrentRow] = useState([]);
 
   const accessToken = localStorage.getItem("access_token");
   useEffect(() => {
@@ -31,6 +34,39 @@ const PracCollegeReview = (props) => {
 
   if (!accessToken) {
     return <Login />; // Render the Login component if access token doesn't exist
+  }
+
+  function MyVerticallyCenteredModal(props) {
+    return (
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Modal heading
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h4>Centered Modal</h4>
+          <h1>{currentRow[0]}</h1>
+          <br />
+          <h1>{currentRow[1]}</h1>
+          <br />
+          <h1>{currentRow[2]}</h1>
+          <br />
+          <h1>{currentRow[3]}</h1>
+          <br />
+          <h1>{currentRow[4]}</h1>
+          <br />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={props.onHide}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    );
   }
 
   return (
@@ -102,29 +138,28 @@ const PracCollegeReview = (props) => {
                       }
                     })
                     .map((item) => (
-                      <tr
-                        style={{ border: "1px" }}
-                        key={item[0]}
-                        id={item[0]}
-                        // onClick={() => {
-                        //   const responseData = item[0];
-                        //   navigate("/CourseCard", {
-                        //     state: { data: { responseData } },
-                        //   });
-                        // }}
-                      >
+                      <tr style={{ border: "1px" }} key={item[0]} id={item[0]}>
                         <td className="tableText">{item[0]}</td>
                         <td className="tableText">{item[1]}</td>
                         <td className="tableText">{item[2]}</td>
                         <td className="tableText">{item[3]}</td>
                         <td className="tableText">{item[4]}</td>
                         <td>
-                          <button
-                            //id={item[0]}
+                          <Button
+                            variant="primary"
                             className="collegeReviewDetail"
+                            onClick={() => {
+                              setCurrentRow(item);
+                              setModalShow(true);
+                            }}
                           >
-                            Show
-                          </button>
+                            Launch vertically centered modal
+                          </Button>
+
+                          <MyVerticallyCenteredModal
+                            show={modalShow}
+                            onHide={() => setModalShow(false)}
+                          />
                         </td>
                       </tr>
                     ))
