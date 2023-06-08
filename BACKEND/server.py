@@ -409,16 +409,7 @@ def getCountDetail():
 
 ###################################################################################
 
-@app.route('/getCourseName',methods = ["GET"])
-def getCourseName():
-    List = dbModel.getCoursesName()
-    # print("posting......")
-    # print(List)
-    if List != None:
-        return jsonify(List)
-    return "'key': 'empty'"
-
-@app.route('/sendDuty',methods = ["GET","POST"])
+@app.route('/sendDuty',methods = ["GET","POST"])  #Sending the duty to Examiner and change the status = 1 i.e. assigned.
 def sendDuty():
     data = request.get_json()
     string = dbModel.SendDuty(data['Id'])
@@ -426,7 +417,7 @@ def sendDuty():
         return "success"
     return "'key': 'empty'"
 
-@app.route('/createDuty',methods = ["GET","POST"])
+@app.route('/createDuty',methods = ["GET","POST"]) #Creating Exam_duty with status = 0 i.e. not assigned.
 def createDuty():
     print("In Create app.py")
     data = request.get_json()
@@ -444,29 +435,40 @@ def createDuty():
         return jsonify(id)
     return "'key': 'empty'"
 
-@app.route('/getDutyDetail' ,methods = ["GET","POST"])
+@app.route('/getDutyDetail' ,methods = ["GET","POST"]) #Getting duty detail of specific duty_id.
 def getDutyDetail():
     print("In getDutyDetail aap.py")
     data = request.get_json()
     print("DataID: ",data)
     List = dbModel.getDuty(data['Id'])
     print("List: ",List)
-    if List != None:
-        dutyDetail = dbModel.fetchDutyDetail(List)
-        if dutyDetail != None:
-            return jsonify(dutyDetail)
+    dutyDetail = dbModel.getDutyDetailToBeSend(data['Id'])
+    print(dutyDetail)
+    if dutyDetail != None:
+        return jsonify(dutyDetail)
     return "'key': 'empty'" 
 
-@app.route('/getNotAssignedDuties' ,methods = ["GET"])
+@app.route('/getDutiesStatus', methods = ['GET','POST'])#Getting duty detail of specific status.
+def getDutiesStatus():
+    type=request.args.get("typeduty")
+    if int(type)==4:
+       list2= dbModel.getAllDuties()
+    else:
+       list2=dbModel.getDutiesListType(int(type))
+    if list2 != None:
+        return jsonify(list2)
+    return "'key': 'empty'"
+
+@app.route('/getNotAssignedDuties' ,methods = ["GET"]) #Getting duties with status = 0 i.e. not assigned.
 def getNotAssignedDuties():
-    print("In getAllDuties aap.py")
+    print("In getNotAssignedDuties aap.py")
     List = dbModel.getNotAssignedDuties()
     print("List: ",List)
     if List != None:
         return jsonify(List)
     return "'key': 'empty'" 
 
-@app.route('/getAllDuties' ,methods = ["GET"])
+@app.route('/getAllDuties' ,methods = ["GET"]) #Getting all duties i.e. assigned, accepted, rejected.
 def getAllDuties():
     print("In getAllDuties aap.py")
     List = dbModel.getAllDuties()
@@ -475,7 +477,7 @@ def getAllDuties():
         return jsonify(List)
     return "'key': 'empty'"
 
-@app.route('/getAllExaminerName',methods = ["GET","POST"])
+@app.route('/getAllExaminerName',methods = ["GET","POST"]) #Getting all Examiner Details with given examiner_course.
 def getAllExaminerName():
     courseName = request.get_json()
     if len(courseName)!=0:
@@ -485,7 +487,7 @@ def getAllExaminerName():
         return jsonify(NameList)
     return "'key': 'empty'"
 
-@app.route('/getAllData', methods =["GET"])
+@app.route('/getAllData', methods =["GET"]) #Getting current followed roadmapYear and current enrolled Departments.
 def getAllData():
     List =[] 
     List.append(dbModel.GetCurrentFollowedRoadMapYear())
@@ -494,52 +496,38 @@ def getAllData():
         return jsonify(List)
     return "'key': 'empty'" 
 
-@app.route('/getAllCourses',methods = ["GET","POST"])
+@app.route('/getAllCourses',methods = ["GET","POST"]) #Getting all courses from db of specific with duty_status = notAssigned.
 def getAllCourses():
     department = request.get_json()
     NameList = []
     NameList  = dbModel.getCoursesName((department['department']).lower(),(department['roadMapYear']))
-    # NameList  = m.getCoursesName(dept,year)
-   
     if NameList != None:
         return jsonify(NameList)
     return "'key': 'empty'"
 
-@app.route('/click/Accepted')
-def button_click():
-    print(f'Button with ID "" was clicked!')
-    return 'Button clicked!'
-
-@app.route('/click/Rejected')
-def button_reject():
-    print(f'Button with ID "" was clicked!')
-    return 'Reject Button clicked!'
-
-@app.route('/getDataFromReact',methods=["POST"])
-def setTime():
+@app.route('/getDataFromReact',methods=["POST"]) #Getting roadmap .csv file from react and save it to db.
+def getDataFromReact():
     if request.method == 'POST':
         FileName=request.form['fileName']
         dataOfFile=request.form['ArrayList']
         DictionaryOfdata=json.loads(dataOfFile)
-        
-        for e in DictionaryOfdata:
-            dbModel.insertRoadmap(json.dumps(e))
-        DictionaryOfdata[0]
-        # print(f'Posting....{FileName}{DictionaryOfdata[0]}{DictionaryOfdata[0]["rd_crs_code"]}')
+        print(FileName)
+        # for e in DictionaryOfdata:
+            # dbModel.insertRoadmap(e)
+        # DictionaryOfdata[0]
         return "Hello"
     print('Wrong')
     return "Hello"
 
-@app.route('/set_data',methods = ["GET"])
+@app.route('/set_data',methods = ["GET"]) #Sending roadmap data/list to frontend.
 def set_data():
     List = dbModel.getRoadMapList()
     print("posting......")
-    #print(List)
     if List != None:
         return jsonify(List)
     return "'key': 'empty'"
 
-@app.route('/send_data', methods=["POST","GET"])
+@app.route('/send_data', methods=["POST","GET"])  #getting roadmap detail of given course_id.
 def send_data():
     course = None
     id = request.get_json()
@@ -550,12 +538,11 @@ def send_data():
     else:
         return jsonify(course)
 
-@app.route('/put_data', methods=["GET"])
+@app.route('/put_data', methods=["GET"]) #getting roadmap detail of given course_id.
 def put_data():
     course = None
     id = request.get_json()
     course = dbModel.getcourse(id)
-    print(course)
     return jsonify(course)
 
 

@@ -962,6 +962,26 @@ class DatabaseModel:
 
     ############################################3###################################
 
+#Get Exam Duty of based on its types assigned, not assigned or rejected.
+    def getDutiesListType(self,status):
+        try:
+            print("\n\nget type duties")
+            if self.connection!=None:
+                cursor=self.connection.cursor()
+                query = "select ed.exam_duty_id, u.usr_name,u.usr_email,rd.rd_crs_name,rd.rd_semester,rd.rd_dept,ed.status_req from users u "\
+                    "JOIN examiner e ON u.usr_id=e.user_id JOIN exam_duty ed "\
+                    "ON e.examiner_id=ed.examiner_id JOIN roadmap rd ON "\
+                    "rd.rd_id = ed.rd_id where ed.status_req != 0 and ed.status_req = %s ;"
+                args = (status,)
+                cursor.execute(query,args)
+                dutyList=cursor.fetchall()
+                return dutyList
+        except Exception as e:
+                print("Exception in getting duties",str(e))
+        finally:
+                if cursor!=None:
+                    cursor.close()
+
     def onDutyExaminers(self):
         try:
             if self.connection!=None:
@@ -1014,8 +1034,8 @@ class DatabaseModel:
                 cursor=self.connection.cursor()
                 query ="Select * from roadmap where rd_id = %s;"
                 arg =(id,)
-                self.cursor.execute(query,arg)
-                crs_code=self.cursor.fetchone()
+                cursor.execute(query,arg)
+                crs_code=cursor.fetchone()
                 return crs_code
         except Exception as e:
                 print("Exception in getting findCrsDetail",str(e))
@@ -1081,55 +1101,55 @@ class DatabaseModel:
     def GetCurrentFollowedRoadMapYear(self):
         try:
             if self.connection!=None:
-                self.cursor=self.connection.cursor()
+                cursor=self.connection.cursor()
                 currYear = self.GetCurrentYear()
                 print(currYear)
                 lastYear=int(currYear)-3
                 strLastYear=str(lastYear)
 
                 print(lastYear)
-                self.cursor.execute("""Select DISTINCT batch_rd_year from batch_enrollment where date_part('year', to_date(batch_year_date, 'DD/MM/YYYY')) BETWEEN %s and %s; """, (strLastYear,currYear))
-                roadmapList=self.cursor.fetchall()
+                cursor.execute("""Select DISTINCT batch_rd_year from batch_enrollment where date_part('year', to_date(batch_year_date, 'DD/MM/YYYY')) BETWEEN %s and %s; """, (strLastYear,currYear))
+                roadmapList=cursor.fetchall()
                 return roadmapList
 
         except Exception as e:
                 print("Exception in getting roadmap",str(e))
         finally:
-                if self.cursor!=None:
-                    self.cursor.close()
+                if cursor!=None:
+                    cursor.close()
 
     def GetCurrentBatchesXyear(self):
         try:
             # print("In GetCurrentBatchesXyear calc")
             if self.connection!=None:
-                self.cursor=self.connection.cursor()
+                cursor=self.connection.cursor()
                 currYear = self.GetCurrentYear()
                 # print(type(currYear))
                 lastYear=int(currYear)-3
                 # print(str(lastYear))
-                self.cursor.execute("""Select date_part('year', to_date(batch_year_date, 'DD/MM/YYYY')) from batch_enrollment where date_part('year', to_date(batch_year_date, 'DD/MM/YYYY')) BETWEEN %s and %s; """, (lastYear,currYear))
-                currentBatches=self.cursor.fetchall()
+                cursor.execute("""Select date_part('year', to_date(batch_year_date, 'DD/MM/YYYY')) from batch_enrollment where date_part('year', to_date(batch_year_date, 'DD/MM/YYYY')) BETWEEN %s and %s; """, (lastYear,currYear))
+                currentBatches=cursor.fetchall()
                 # print(roadmapList)
                 return currentBatches
 
         except Exception as e:
                 print("Exception in getting roadmap",str(e))
         finally:
-                if self.cursor!=None:
-                    self.cursor.close()
+                if cursor!=None:
+                    cursor.close()
 
     def GetDepartments(self):
         try:
             if self.connection!=None:
-                self.cursor=self.connection.cursor()
-                self.cursor.execute("Select dep_name from departments;")
-                deptList=self.cursor.fetchall()
+                cursor=self.connection.cursor()
+                cursor.execute("Select dep_name from departments;")
+                deptList=cursor.fetchall()
                 return deptList
         except Exception as e:
                 print("Exception in getting departments",str(e))
         finally:
-                if self.cursor!=None:
-                    self.cursor.close()
+                if cursor!=None:
+                    cursor.close()
 
     def getFollowedRoadMapByCurrentBatches(self):
         # print("In getFollowedRoadMapByCurrentBatches")
@@ -1150,15 +1170,15 @@ class DatabaseModel:
         # RoadMapIDList = None
         try:
             if self.connection!=None:
-                self.cursor=self.connection.cursor()
-                self.cursor.execute("SELECT * FROM roadmap WHERE rd_year IN ({}) AND rd_dept IN ({}) AND rd_semester IN ({}) and rd_prac_status = 0;".format(years_string, departments_string, semesters_string))
-                RoadMapIDList=self.cursor.fetchall()
+                cursor=self.connection.cursor()
+                cursor.execute("SELECT * FROM roadmap WHERE rd_year IN ({}) AND rd_dept IN ({}) AND rd_semester IN ({}) and rd_prac_status = 0;".format(years_string, departments_string, semesters_string))
+                RoadMapIDList=cursor.fetchall()
                 return RoadMapIDList
         except Exception as e:
             print("Exception in getting roadmapID",str(e))
         finally:
-                if self.cursor!=None:
-                    self.cursor.close()
+                if cursor!=None:
+                    cursor.close()
         
     def getSemester(self):
         CurrentBatch = self.GetCurrentBatchesXyear()
@@ -1178,35 +1198,53 @@ class DatabaseModel:
     def getNotAssignedDuties(self):
         try:
             if self.connection!=None:
-                self.cursor=self.connection.cursor()
-                self.cursor.execute("select ed.exam_duty_id, u.usr_name,u.usr_email,rd.rd_crs_name,rd.rd_semester,rd.rd_dept from users u "\
+                cursor=self.connection.cursor()
+                cursor.execute("select ed.exam_duty_id, u.usr_name,u.usr_email,rd.rd_crs_name,rd.rd_semester,rd.rd_dept from users u "\
                     "JOIN examiner e ON u.usr_id=e.user_id JOIN exam_duty ed "\
                     "ON e.examiner_id=ed.examiner_id JOIN roadmap rd ON "\
                     "rd.rd_id = ed.rd_id where ed.status_req = 0;")
-                dutyList=self.cursor.fetchall()
+                dutyList=cursor.fetchall()
                 print("Duty list : ",dutyList)
                 return dutyList
         except Exception as e:
                 print("Exception in getting duties",str(e))
         finally:
-                if self.cursor!=None:
-                    self.cursor.close()
+                if cursor!=None:
+                    cursor.close()
     
     def getAllDuties(self):
         try:
             if self.connection!=None:
-                self.cursor=self.connection.cursor()
-                self.cursor.execute("select ed.exam_duty_id, u.usr_name,u.usr_email,rd.rd_crs_name,rd.rd_semester,rd.rd_dept,ed.status_req from users u "\
+                cursor=self.connection.cursor()
+                cursor.execute("select ed.exam_duty_id, u.usr_name,u.usr_email,rd.rd_crs_name,rd.rd_semester,rd.rd_dept,ed.status_req from users u "\
                     "JOIN examiner e ON u.usr_id=e.user_id JOIN exam_duty ed "\
                     "ON e.examiner_id=ed.examiner_id JOIN roadmap rd ON "\
                     "rd.rd_id = ed.rd_id where ed.status_req != 0;")
-                dutyList=self.cursor.fetchall()
+                dutyList=cursor.fetchall()
                 return dutyList
         except Exception as e:
                 print("Exception in getting duties",str(e))
         finally:
-                if self.cursor!=None:
-                    self.cursor.close()
+                if cursor!=None:
+                    cursor.close()
+
+    def getDutyDetailToBeSend(self,id):
+        try:
+            if self.connection!=None:
+                cursor=self.connection.cursor()
+                query = "select u.usr_name,u.usr_email,rd.rd_crs_name,rd.rd_semester,rd.rd_dept,ed.status_req from users u "\
+                    "JOIN examiner e ON u.usr_id=e.user_id JOIN exam_duty ed "\
+                    "ON e.examiner_id=ed.examiner_id JOIN roadmap rd ON "\
+                    "rd.rd_id = ed.rd_id where ed.exam_duty_id = %s;"
+                args =(id,)
+                cursor.execute(query,args)
+                dutyList=cursor.fetchone()
+                return dutyList
+        except Exception as e:
+                print("Exception in getting duties",str(e))
+        finally:
+                if cursor!=None:
+                    cursor.close()
 
     def getCoursesName(self,department,year):
         
@@ -1382,39 +1420,42 @@ class DatabaseModel:
     def deadlines(self, crs_id, exam_id):
         try:
             if self.connection!=None:
-                self.cursor=self.connection.cursor()
+                cursor=self.connection.cursor()
                 query = "Select exam_duty_id, deadline from exam_duty where examiner_id = %s and rd_id = %s;"
                 args = (exam_id, crs_id)
-                self.cursor.execute(query,args)
-                deptList=self.cursor.fetchone()
+                cursor.execute(query,args)
+                deptList=cursor.fetchone()
                 return deptList
         except Exception as e:
                 print("Exception in fetching Deadlines",str(e))
         finally:
-                if self.cursor!=None:
-                    self.cursor.close()
+                if cursor!=None:
+                    cursor.close()
     
     def getDuty(self,id):
         try:
             if self.connection!=None:
-                self.cursor=self.connection.cursor()
+                cursor=self.connection.cursor()
                 query = "Select examiner_id, rd_id from exam_duty where exam_duty_id = %s;"
                 args = (id,)
-                self.cursor.execute(query,args)
-                dList=self.cursor.fetchone()
+                cursor.execute(query,args)
+                dList=cursor.fetchone()
                 print("getDuty: ",dList)
                 return dList
         except Exception as e:
                 print("Exception in fetching Duty",str(e))
         finally:
-                if self.cursor!=None:
-                    self.cursor.close()
+                if cursor!=None:
+                    cursor.close()
     
     def fetchDutyDetail(self, List):
         #List = [examinerId,Name,dept,roadmapyr,rd_id,courseName]
         DataList = []
+        examiner =[]
+        courseDetail = []
         if(List):
             examiner = self.ExaminerDetailForDuty(List[0])
+            print(examiner)
             courseDetail= self.findCrsDetail(List[1])
         for item in examiner:
              DataList.append(item)
@@ -1441,7 +1482,6 @@ class DatabaseModel:
             return NULL
     
     def getcourse(self, id):
-        
         if self.connection != None:
             cursor = self.connection.cursor()
             try:
@@ -1458,22 +1498,25 @@ class DatabaseModel:
             return NULL
 # Open a cursor to perform database operations
     def insertRoadmap(self, roadmap):
-        if self.connection != None:
-                cursor = self.connection.cursor()
-                try:
-                    query = 'INSERT INTO public."roadmap" (rd_dept,rd_semester,rd_year,rd_crs_code,rd_crs_name,rd_prac_status,rd_crs_hr,rd_crs_book,rd_crs_outline) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)'
-                    args = ('usma', '12345', '32202-3561801-6', 'xyz.png', 'lahore', 'usma@gmail.com', 'true', 'xyzz', 'male')
-                    cursor.execute(query, args)
-                    self.connection.commit()
-                    return True
-                except Exception as e:
-                    print("Exception in insertRoadmap", str(e))
+        if(len(roadmap)):
+            if self.connection != None:
+                    cursor = self.connection.cursor()
+                    try:
+                        query = 'INSERT INTO public."roadmap" (rd_id,rd_dept,rd_semester,rd_year,rd_crs_code,rd_crs_name,rd_prac_status,rd_crs_hr,rd_crs_book,rd_crs_outlline) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'
+                        args = (roadmap['rd_id'], roadmap['rd_dept'], roadmap['rd_semester'], roadmap['rd_year'], roadmap['rd_crs_code'], roadmap['rd_crs_name'], roadmap['rd_prac_status'], roadmap['rd_crs_hr'], roadmap['rd_crs_book'], roadmap['rd_crs_outlline'])
+                        cursor.execute(query, args)
+                        self.connection.commit()
+                        return True
+                    except Exception as e:
+                        print("Exception in insertRoadmap", str(e))
+                        return False
+                    finally:
+                        if cursor != None:
+                            cursor.close()
+            else:
                     return False
-                finally:
-                    if cursor != None:
-                        cursor.close()
         else:
-                return False
+             return False
     
     def updateRoadmap(self, dept, course_name, course_code, ID=240):
         if self.connection != None:
@@ -1512,8 +1555,3 @@ class DatabaseModel:
 
 # dbModel= DatabaseModel("ACMS","postgres","aat","localhost");
 # dbModel.GetCurrentFollowedRoadMapYear();
-
-        
-
-
-

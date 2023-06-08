@@ -75,6 +75,19 @@ const styles = StyleSheet.create({
     // width: window.innerWidth, //the pdf viewer will take up all of the width and height
     height: window.innerHeight,
   },
+  title:{
+    width: '100%',
+    fontSize:'18',
+    border:'none',
+    marginLeft:'8%',
+    // marginRight:'20%',
+    marginTop:'1px',
+    height:'auto',
+    marginBottom:'2%',
+    fontWeight:'ultrabold',
+    // margin:'auto'
+
+  },
 });
 function FORMPDF() {
   const [set_data, course] = useState([]);
@@ -101,6 +114,7 @@ function FORMPDF() {
     <PDFViewer style={styles.viewer} file={set_data[5]} title={set_data[5]}>
       <Document file={set_data[5]} title={set_data[5]} download>
         <Page size="A4" style={styles.page}>
+        <Text style={styles.title}>{set_data[4]} {set_data[5]}</Text>
           <View style={styles.container} key={set_data[0]}>
             <Text style={styles.First_Row}>Course Title </Text>
             <Text style={styles.first_disc}> {set_data[5]}</Text>

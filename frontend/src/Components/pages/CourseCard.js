@@ -29,7 +29,7 @@ export default function CourseCard() {
         Id: state.data.responseData,
       });
     };
-    navigate("/home");
+    navigate("/ShowDutiesEx");
     retrieve();
   }
 

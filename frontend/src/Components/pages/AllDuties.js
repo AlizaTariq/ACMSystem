@@ -62,7 +62,18 @@ export default function AllDuties() {
 
   // // Set the modified duties list in state
   // setDuties(modifiedDuties);
+  const handleOnClickDutyBtn = (event) => {
+    console.log("handleOnClickDutyBtn --> ", event.target.value);
 
+    fetch(
+      "http://127.0.0.1:5000/getDutiesStatus?typeduty=" + event.target.value
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setDuties(data);
+      })
+      .then((data1) => console.log("Specific duty list is ", duties));
+  };
   return (
     <>
       <NavBar />
@@ -76,7 +87,49 @@ export default function AllDuties() {
               type="search"
               placeholder="Search"
             />
-            {/* <Button className = "m-2" variant="dark" onClick={CreateDuty}>Create Duties</Button> */}
+            <div className="buttons">
+              <button
+                onClick={handleOnClickDutyBtn}
+                id="acceptBtn"
+                className="showDutyBtn"
+                value="2"
+              >
+                Accepted
+              </button>
+              <button
+                onClick={handleOnClickDutyBtn}
+                id="rejectBtn"
+                className="showDutyBtn"
+                value="3"
+              >
+                Rejected
+              </button>
+              {/* <button
+            onClick={handleOnClickDutyBtn}
+            id="pendingBtn"
+            className="showDutyBtn"
+            value="1"
+          >
+            Pending
+          </button> */}
+              <button
+                onClick={handleOnClickDutyBtn}
+                id="notAssignedBtn"
+                className="showDutyBtn"
+                value="0"
+              >
+                Not Assigned
+              </button>
+
+              <button
+                onClick={handleOnClickDutyBtn}
+                id="showAllBtn"
+                className="showDutyBtn"
+                value="4"
+              >
+                Show All Duties
+              </button>
+            </div>
           </p>
         </div>
         <div className="d-flex flex-row bd-highlight">

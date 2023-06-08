@@ -62,7 +62,7 @@ export default function TableOfCariculum() {
     input.click();
   }
   function uploadFile() {
-    const url = "http://127.0.0.1:5000/getDataFromReact";
+    const url = "http://localhost:5000/getDataFromReact";
     const progressing = document.getElementById("progressbarvalue");
     const progressblue = document.getElementById("progressBlue");
     var formData = new FormData();
@@ -151,6 +151,10 @@ export default function TableOfCariculum() {
                         item[5].toLowerCase().includes(values.toLowerCase())
                       ) {
                         return item;
+                      } else if (
+                        item[1].toLowerCase().includes(values.toLowerCase())
+                      ) {
+                        return item;
                       }
                     })
                     .map((item) => (
@@ -199,7 +203,7 @@ export default function TableOfCariculum() {
         </div>
       </div>
 
-      <div
+      {/* <div
         className="modal fade"
         id="exampleModal"
         tabIndex="-1"
@@ -239,6 +243,83 @@ export default function TableOfCariculum() {
               </div>
               <div>
                 <p>Your File Name: {selectedFile} </p>
+              </div>
+              <div>
+                <label id="progressbarvalue" htmlFor="progressBar">
+                  0 %
+                </label>
+                <progress id="progressBlue" value="0" max="100"></progress>
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button className="btn btn-primary" onClick={uploadFile}>
+                Upload
+              </button>
+            </div>
+          </div>
+        </div>
+      </div> */}
+      <div
+        className="modal fade"
+        id="exampleModal"
+        tabIndex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Upload Carriculum
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+                style={{ border: "white" }}
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              {/* <label >Degree</label>
+                      <select  className="form-select" aria-label="Default select example">
+                        <option value="1">CS</option>
+                        <option value="2">IT</option>
+                      </select> */}
+              <label>Upload Your File </label>
+              <div className="container" id="modell">
+                <div id="browsing">
+                  <h1>
+                    <i className="fa fa-download" aria-hidden="true"></i>
+                  </h1>
+                  <button
+                    className="btn btn-primary"
+                    onClick={showOpenFileDialog}
+                  >
+                    Import Data
+                  </button>
+                </div>
+              </div>
+              <div>
+                <h6
+                  style={{
+                    color: "black",
+                    fontWeight: "lighter",
+                    fontSize: "8",
+                  }}
+                >
+                  Your File Name: {selectedFile}{" "}
+                </h6>
               </div>
               <div>
                 <label id="progressbarvalue" htmlFor="progressBar">

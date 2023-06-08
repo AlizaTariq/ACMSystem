@@ -40,7 +40,7 @@ export default function DutyDetailsEx() {
   if (!accessToken) {
     return <Login />; // Render the Login component if access token doesn't exist
   }
-
+  // name,email,crs_name,semester,dept
   return (
     <>
       <NavBar />
@@ -65,24 +65,16 @@ export default function DutyDetailsEx() {
                       {state.data.responseData}
                     </h5>
                     <h5>
-                      <b>Name: </b>
-                      {duty[0]}
-                    </h5>
-                    <h5>
-                      <b>Email </b>
-                      {duty[3]}
-                    </h5>
-                    <h5>
-                      <b>Institute: </b>
+                      <b>Department: </b>
                       {duty[4]}
                     </h5>
                     <h5>
                       <b>Semester: </b>
-                      {duty[5]}
+                      {duty[3]}
                     </h5>
                     <h5>
                       <b>Course: </b>
-                      {duty[6]}
+                      {duty[2]}
                     </h5>
                     <p className="card-text">
                       <small className="text-body-secondary">
@@ -104,42 +96,25 @@ export default function DutyDetailsEx() {
                     alt="..."
                   />
                 </div>
-                {/* <div className="col-md-8">
-                <div className="card-body">
-                  <h5 className="card-title">
-                    <b>Teacher Detail</b>
-                  </h5>
-                  <h5>
-                    <b>Name:</b>{" "}
-                    {teacherStatus && teacherDetail.examiner !== null
-                      ? teacherDetail.examiner[1]
-                      : "Not Assigned"}
-                  </h5>
-                  <h5>
-                    <b>ID</b>:{" "}
-                    {teacherStatus && teacherDetail.examiner !== null
-                      ? teacherDetail.examiner[0]
-                      : "Not Assigned"}
-                  </h5>
-                  <h5>
-                    <b>Email:</b>{" "}
-                    {teacherStatus && teacherDetail.examiner !== null
-                      ? teacherDetail.examiner[2]
-                      : "Not Assigned"}
-                  </h5>
-                  <h5>
-                    <b>Institution:</b>{" "}
-                    {teacherStatus && teacherDetail.examiner !== null
-                      ? teacherDetail.examiner[3]
-                      : "Not Assigned"}
-                  </h5>
-                  <p className="card-text">
-                    <small className="text-body-secondary">
-                      Last updated 3 mins ago
-                    </small>
-                  </p>
+                <div className="col-md-8">
+                  <div className="card-body">
+                    <h5 className="card-title">
+                      <b>Examiner Detail</b>
+                    </h5>
+                    <h5>
+                      <b>Name:</b> {duty[0]}
+                    </h5>
+                    <h5>
+                      <b>Email:</b> {duty[1]}
+                    </h5>
+                    <h5></h5>
+                    <p className="card-text">
+                      <small className="text-body-secondary">
+                        Last updated 3 mins ago
+                      </small>
+                    </p>
+                  </div>
                 </div>
-              </div> */}
               </div>
             </div>
           </div>
