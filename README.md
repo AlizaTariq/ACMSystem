@@ -8,7 +8,7 @@
     
     Run the following commands :
     1. cd backend (In one terminal open backend folder.)
-    2. pip install requirements.txt (To install all required packages.)
+    2. pip install -r requirements.txt (To install all required packages.)
     3. python server.py (To run.)
   
 5. **Setup frontend.**
