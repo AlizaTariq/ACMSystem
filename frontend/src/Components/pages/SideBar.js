@@ -61,7 +61,7 @@ const SideBar = () => {
 
   return (
     <div
-      style={{ display: "flex", height: "100vh", overflow: "scroll initial" }}
+      style={{ display: "flex", height: "107vh", overflow: "scroll initial" }}
     >
       <CDBSidebar textColor="#fff" backgroundColor="#061b28">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
@@ -75,14 +75,14 @@ const SideBar = () => {
         </CDBSidebarHeader>
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <a href="/" activeclassname="activeClicked">
+            <a href="/home" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </a>
             <a href="/Profile" activeclassname="activeClicked">
-              <CDBSidebarMenuItem icon="user">Profile Page</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="user">Profile</CDBSidebarMenuItem>
             </a>
             <a href="/TableOfCariculum" activeclassname="activeClicked">
-              <CDBSidebarMenuItem icon="table">Carriculum</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="table">Curriculum</CDBSidebarMenuItem>
             </a>
 
             <a href="/PracCollegeReview" activeclassname="activeClicked">

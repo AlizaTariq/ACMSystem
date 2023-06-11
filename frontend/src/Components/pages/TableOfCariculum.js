@@ -19,7 +19,7 @@ export default function TableOfCariculum() {
   const [data_get, setData] = useState([]);
   const navigate = useNavigate();
   const [values, setSearchValue] = useState("");
-
+  const [filteredItems, setFilteredItems] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [data, setdata] = useState({});
 
@@ -28,8 +28,27 @@ export default function TableOfCariculum() {
   // Logic to calculate the current items to display based on current page and itemsPerPage
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data_get.slice(indexOfFirstItem, indexOfLastItem);
+  // const currentItems = data_get.slice(indexOfFirstItem, indexOfLastItem);
   const accessToken = localStorage.getItem("access_token");
+  const currentItems =
+    filteredItems.length > 0
+      ? filteredItems
+      : data_get.slice(indexOfFirstItem, indexOfLastItem);
+  const searching = (event) => {
+    const searchValue = event.target.value.toLowerCase();
+    setSearchValue(searchValue);
+    if (searchValue === "") {
+      setFilteredItems([]);
+      return;
+    }
+
+    const filteredItems = data_get.filter((item) =>
+      item[5].toLowerCase().includes(searchValue)
+    );
+    setFilteredItems(filteredItems);
+    // setCurrentPage(1);
+    // handlePageChange()
+  };
 
   // Function to handle page change
   const handlePageChange = (pageNumber) => {
@@ -109,7 +128,7 @@ export default function TableOfCariculum() {
               style={{ marginTop: "5px" }}
               id="searching"
               className="form-control mr-sm-2"
-              onChange={(event) => setSearchValue(event.target.value)}
+              onChange={(event) => searching(event)}
               type="search"
               placeholder="Search"
             />
@@ -143,51 +162,37 @@ export default function TableOfCariculum() {
             </thead>
             <tbody>
               {currentItems
-                ? currentItems
-                    .filter((item) => {
-                      if (values === "") {
-                        return item;
-                      } else if (
-                        item[5].toLowerCase().includes(values.toLowerCase())
-                      ) {
-                        return item;
-                      } else if (
-                        item[1].toLowerCase().includes(values.toLowerCase())
-                      ) {
-                        return item;
+                ? currentItems.map((item) => (
+                    <tr
+                      style={{ border: "1px" }}
+                      key={item[0]}
+                      id={item[0]}
+                      onClick={() =>
+                        navigate({
+                          pathname: "/FORMPDF",
+                          search: createSearchParams({
+                            courseId: item[0],
+                          }).toString(),
+                        })
                       }
-                    })
-                    .map((item) => (
-                      <tr
-                        style={{ border: "1px" }}
-                        key={item[0]}
-                        id={item[0]}
-                        onClick={() =>
-                          navigate({
-                            pathname: "/FORMPDF",
-                            search: createSearchParams({
-                              courseId: item[0],
-                            }).toString(),
-                          })
-                        }
-                      >
-                        <td className="tableText">{item[0]}</td>
-                        <td className="tableText">{item[1]}</td>
-                        <td className="tableText">{item[2]}</td>
-                        <td className="tableText">{item[3]}</td>
-                        <td className="tableText">{item[4]}</td>
-                        <td className="tableText">{item[5]}</td>
-                        <td className="tableText">
-                          <button
-                            className="showDutyTableBtn"
-                            id={item[0]}
-                            onClick={handleClick}
-                          >
-                            Details
-                          </button>
-                        </td>
-                      </tr>
-                    ))
+                    >
+                      <td className="tableText">{item[0]}</td>
+                      <td className="tableText">{item[1]}</td>
+                      <td className="tableText">{item[2]}</td>
+                      <td className="tableText">{item[3]}</td>
+                      <td className="tableText">{item[4]}</td>
+                      <td className="tableText">{item[5]}</td>
+                      <td className="tableText">
+                        <button
+                          className="showDutyTableBtn"
+                          id={item[0]}
+                          onClick={handleClick}
+                        >
+                          Details
+                        </button>
+                      </td>
+                    </tr>
+                  ))
                 : "Loading..."}
             </tbody>
           </table>

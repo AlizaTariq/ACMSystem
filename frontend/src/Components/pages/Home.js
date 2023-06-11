@@ -154,7 +154,7 @@ const UserData = () => {
                 id="genDutyBtn"
                 onClick={handleButtonClick}
               >
-                <b>Generate Duties</b>
+                <b>Click To Generate</b>
               </Button>
               <div className="card-statistic-3 p-3">
                 <div className="card-icon card-icon-large">
